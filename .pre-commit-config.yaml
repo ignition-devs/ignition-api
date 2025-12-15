@@ -1,0 +1,31 @@
+ci:
+  skip: [black, pylint]
+
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: black --line-length 79 --target-version py27 src
+        language: system
+        types: [python]
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+  - repo: https://github.com/PyCQA/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        exclude: ^src/com/
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
