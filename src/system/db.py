@@ -51,30 +51,37 @@ __all__ = [
     "addDatasource",
     "beginNamedQueryTransaction",
     "beginTransaction",
-    "clearQueryCache",
+    "clearAllNamedQueryCaches",
+    "clearNamedQueryCache",
     "closeTransaction",
     "commitTransaction",
     "createSProcCall",
-    "execQuery",
+    "dateFormat",
     "execSProcCall",
-    "execScalar",
-    "execUpdate",
-    "execUpdateAsync",
     "getConnectionInfo",
     "getConnections",
+    "refresh",
     "removeDatasource",
     "rollbackTransaction",
+    "runNamedQuery",
     "runPrepQuery",
     "runPrepUpdate",
+    "runQuery",
+    "runSFNamedQuery",
     "runSFPrepUpdate",
+    "runSFUpdateQuery",
     "runScalarPrepQuery",
+    "runScalarQuery",
     "runUpdateQuery",
     "setDatasourceConnectURL",
     "setDatasourceEnabled",
     "setDatasourceMaxConnections",
 ]
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Optional, Union
+
+from java.util import Date
+from javax.swing import JComponent
 
 from com.inductiveautomation.ignition.common import BasicDataset
 from com.inductiveautomation.ignition.common.script.builtin import (
@@ -266,22 +273,40 @@ def beginTransaction(
     return "transaction_id"
 
 
-def clearQueryCache(
-    project=None,  # type: Union[str, unicode, None]
-    path=None,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> None
-    """This clears the caches for specified Named Queries in a project,
-    or all Named Queries if no arguments are provided.
+def clearAllNamedQueryCaches(project=None):
+    # type: (Union[str, unicode, None]) -> None
+    """This clears the caches of all Named Queries in a project.
+
+    If called from the Shared Scope (i.e., Tag Event Scripts, Alarm
+    Pipelines, etc.) then the name of the project must be passed as a
+    parameter.
 
     Args:
-        project: The project that contains the named query whose cache
-            needs to be cleared. An error will be thrown if no local
-            project is found. Optional.
-        path: The path to the named query whose cache needs to be
-            cleared. Optional.
+        project: The project that contains the Named Query whose cache
+            needs to be cleared. Optional.
     """
-    print(project, path)
+    print(project)
+
+
+def clearNamedQueryCache(*args, **kwargs):
+    # type: (*Union[str, unicode], **Union[str, unicode]) -> None
+    """This clears the cache of a Named Query.
+
+    If called from the Shared Scope (i.e., Tag Event Scripts, Alarm
+    Pipelines, etc.) then the name of the project must be passed as a
+    parameter.
+
+    When calling from the Project Scope use:
+    system.db.clearNamedQueryCache(path)
+
+    When calling from the Shared Scope use:
+    system.db.clearNamedQueryCache(project, path)
+
+    Args:
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+    """
+    print(args, kwargs)
 
 
 def closeTransaction(tx):
@@ -347,29 +372,21 @@ def createSProcCall(
     return SProcCall()
 
 
-def execQuery(
-    path,  # type: Union[str, unicode]
-    parameters=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    tx=None,  # type: Union[str, unicode, None]
-    project=None,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> Any
-    """Executes a query from a Named Query resource.
+def dateFormat(date, formatPattern):
+    # type: (Date, Union[str, unicode]) -> Union[str, unicode]
+    """This function is used to format Dates nicely as strings.
+
+    It uses a format string to guide its formatting behavior.
 
     Args:
-        path: The full path of the Named Query.
-        parameters: A dictionary of parameters for the query. Optional.
-        tx: A transaction ID, obtained from beginNamedQueryTransaction.
-            If not specified, will not be part of a transaction.
-            Optional.
-        project: A project name that the query exists in. Optional.
+        date: The Date object that you'd like to format.
+        formatPattern: A format pattern string to apply.
 
     Returns:
-        The result of the query, as a dataset or a single value for a
-        scalar query.
+        The date as a string formatted according to the format pattern.
     """
-    print(path, parameters, tx, project)
-    return BasicDataset()
+    print(date, formatPattern)
+    return ""
 
 
 def execSProcCall(callContext):
@@ -385,96 +402,6 @@ def execSProcCall(callContext):
             Use system.db.createSProcCall to create a call context.
     """
     print(callContext)
-
-
-def execScalar(
-    path,  # type: Union[str, unicode]
-    parameters=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    tx=None,  # type: Union[str, unicode, None]
-    project=None,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> Optional[Union[float, int, long]]
-    """Executes a scalar query from a named query resource.
-
-    Args:
-        path: The path of the named query.
-        parameters: AA dictionary supplying parameters for the query.
-            Optional.
-        tx: A transaction ID, obtained from beginNamedQueryTransaction.
-            If not specified, will not be part of a transaction.
-            Optional.
-        project: An optional project name that the query exists in.
-            When run in the Gateway scope, if project is not included,
-            either an associated project or the gateway scripting
-            project will be used. Optional.
-
-    Returns:
-        The scalar result of the query; either a single value or None
-        if no rows were returned.
-    """
-    print(path, parameters, tx, project)
-    return 42
-
-
-def execUpdate(
-    path,  # type: Union[str, unicode]
-    parameters=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    tx=None,  # type: Union[str, unicode, None]
-    getKey=False,  # type: bool
-    project=None,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> int
-    """Executes an update query from a Named Query resource. If the
-    Named Query is through a Store and Forward system, use
-    system.db.execUpdateAsync instead.
-
-    Args:
-        path: The full path of the Named Query.
-        parameters: A dictionary supplying parameters for the query.
-            Optional.
-        tx: A transaction identifier. If not specified, will not be part
-            of a transaction. Optional.
-        getKey: If True, the primary key of the row inserted or updated
-            in an update query will be returned. Default value is False.
-            Optional.
-        project: A project name that the query exists in. If no project
-            is specified when run in the Gateway scope, an associated
-            project or the Gateway scripting project will be used.
-            Optional.
-
-    Returns:
-        The result of the query. The result will be either the number of
-        rows affected or the key value that was generated, depending on
-        the value of the `getKey` parameter.
-    """
-    print(path, parameters, tx, getKey, project)
-    return 1
-
-
-def execUpdateAsync(
-    path,  # type: Union[str, unicode]
-    parameters=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    project=None,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> bool
-    """Executes an update query from a Named Query resource through the
-    Store and Forward system.
-
-    Args:
-        path: The full path of the Named Query.
-        parameters: A dictionary supplying parameters for the query.
-            Optional.
-        project: A project name that the query exists in. If no project
-            is specified when run in the Gateway scope, an associated
-            project or the Gateway scripting project will be used.
-            Optional.
-
-    Returns:
-        Boolean flag indicating of True or False if successfully sent to
-        the Store and Forward system.
-    """
-    print(path, parameters, project)
-    return True
 
 
 def getConnectionInfo(name=""):
@@ -513,6 +440,38 @@ def getConnections():
     return BasicDataset()
 
 
+def refresh(component, propertyName):
+    # type: (JComponent, Union[str, unicode]) -> bool
+    """This function will cause a Vision component binding to execute
+    immediately.
+
+    This is most often used for bindings that are set to Polling - Off.
+    In this way, you cause a binding to execute on demand, when you know
+    that the results of its query will return a new result. To use it,
+    you simply specify the component and name of the property on whose
+    binding you'd like to refresh.
+
+    Even though the function includes "db" in the name, the function can
+    update all types of Vision component bindings, including Property
+    and Expression bindings.
+
+    Note:
+        This function will only work within the Vision module. To
+        manually execute bindings in Perspective, use the refreshBinding
+        component method.
+
+    Args:
+        component: The component whose property you want to refresh.
+        propertyName: The name of the property that has a binding that
+            needs to be refreshed.
+
+    Returns:
+        True if the property was found and refreshed successfully.
+    """
+    print(component, propertyName)
+    return True
+
+
 def removeDatasource(name):
     # type: (Union[str, unicode]) -> None
     """Removes a database connection from Ignition.
@@ -538,6 +497,34 @@ def rollbackTransaction(tx):
         tx: The transaction ID.
     """
     print(tx)
+
+
+def runNamedQuery(*args, **kwargs):
+    # type: (*Any, **Any) -> Any
+    """Runs a named query and returns the results.
+
+    Note that the number of parameters in the function is determined by
+    scope. Both versions of the function are listed below.
+
+    When calling from the Project Scope use:
+    system.db.runNamedQuery(path, parameters, [tx], [getKey])
+
+    When calling from the Gateway Scope use:
+    system.db.runNamedQuery(project, path, parameters, [tx], [getKey])
+
+    Args:
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
+    Returns:
+        The results of the query. The exact object returned depends on
+        the Query Type property of the Named Query: typically either a
+        dataset when set to Query, an integer representing the number of
+        rows affected when set to Update Query, or an object matching
+        the datatype of the value returned by a Scalar Query.
+    """
+    print(args, kwargs)
+    return True
 
 
 def runPrepQuery(
@@ -646,6 +633,60 @@ def runPrepUpdate(
     return 1
 
 
+def runQuery(
+    query,  # type: Union[str, unicode]
+    database="",  # type: Union[str, unicode]
+    tx=None,  # type: Union[str, unicode, None]
+):
+    # type: (...) -> DatasetUtilities.PyDataSet
+    """Runs a SQL query, usually a SELECT query, against a database,
+    returning the results as a dataset.
+
+    If no database is specified, or the database is the empty-string "",
+    then the current project's default database connection will be used.
+    The results are returned as a PyDataSet, which is a wrapper around
+    the standard dataset that is convenient for scripting.
+
+    Args:
+        query: A SQL query, usually a SELECT query, to run.
+        database: The name of the database connection to execute
+            against. If omitted or "", the project's default database
+            connection will be used.
+        tx: A transaction identifier. If omitted, the query will be
+            executed in its own transaction.
+
+    Returns:
+        The results of the query as a PyDataSet.
+    """
+    print(query, database, tx)
+    return DatasetUtilities.PyDataSet()
+
+
+def runSFNamedQuery(*args, **kwargs):
+    # type: (*Any, **Any) -> bool
+    """Runs a named query that goes through the Store and Forward
+    system.
+
+    Note that the number of parameters in the function is determined by
+    scope.
+
+    When calling from the Project Scope use:
+    system.db.runSFNamedQuery(path, params)
+
+    When calling from the Gateway Scope use:
+    system.db.runSFNamedQuery(project, path, params)
+
+    Args:
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
+    Returns:
+        True if successfully sent to the Store and Forward system.
+    """
+    print(args, kwargs)
+    return True
+
+
 def runSFPrepUpdate(
     query,  # type: Union[str, unicode]
     args,  # type: List[Any]
@@ -675,6 +716,22 @@ def runSFPrepUpdate(
         True if successfully sent to Store and Forward system.
     """
     print(query, args, datasources)
+    return True
+
+
+def runSFUpdateQuery(query, datasources):
+    # type: (Union[str, unicode], List[Union[str, unicode]]) -> bool
+    """Runs a query through the store and forward system and to multiple
+    datasources at the same time.
+
+    Args:
+        query: A query (typically an UPDATE, INSERT, or DELETE) to run.
+        datasources: List of datasources to run the query through.
+
+    Returns:
+        True if successful and False if not.
+    """
+    print(query, datasources)
     return True
 
 
@@ -710,6 +767,35 @@ def runScalarPrepQuery(
          Returns None if no rows were returned.
     """
     print(query, args, database, tx)
+    return 42
+
+
+def runScalarQuery(
+    query,  # type: Union[str, unicode]
+    database="",  # type: Union[str, unicode]
+    tx=None,  # type: Union[str, unicode, None]
+):
+    # type: (...) -> Any
+    """Runs a query against a database connection just like the runQuery
+    function, but only returns the value from the first row and column.
+
+    If no results are returned from the query, the special value None is
+    returned.
+
+    Args:
+        query: A SQL query that should be designed to return one row and
+            one column.
+        database: The name of the database connection to execute
+            against. If omitted or "", the project's default database
+            connection will be used. Optional.
+        tx: A transaction identifier. If omitted, the query will be
+            executed in its own transaction. Optional.
+
+    Returns:
+         The value from the first row and first column of the results.
+         Returns None if no rows were returned.
+    """
+    print(query, database, tx)
     return 42
 
 

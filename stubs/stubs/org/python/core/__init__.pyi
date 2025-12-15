@@ -232,11 +232,11 @@ class PyDescriptor(PyObject, PyBuiltinCallable.Info):
 class PyException(RuntimeException):
     traceback: Optional[PyTraceback]
     type: Optional[PyObject]
-    value: Union[str, unicode, None, PyObject]
+    value: Optional[Union[PyObject, str, unicode]]
     def __init__(
         self,
         type_: Optional[PyObject] = ...,
-        value: Union[str, unicode, None, PyObject] = ...,
+        value: Optional[Union[PyObject, str, unicode]] = ...,
         traceback: Optional[PyTraceback] = ...,
     ) -> None: ...
     @staticmethod

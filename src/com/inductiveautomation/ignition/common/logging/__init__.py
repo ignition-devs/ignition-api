@@ -7,6 +7,21 @@ from java.lang import Enum
 import ch.qos.logback.classic
 
 
+class Level(Enum):
+    def toLevel(self, value):
+        # type: (ch.qos.logback.classic.Level) -> Level
+        pass
+
+    def toLogBack(self):
+        # type: () -> ch.qos.logback.classic.Level
+        pass
+
+    @staticmethod
+    def values():
+        # type: () -> Iterable[Level]
+        pass
+
+
 class LogFilterSettings(object):
     def addPropertyFilter(self, key, value):
         # type: (Union[str, unicode], Union[str, unicode]) -> None
@@ -21,7 +36,7 @@ class LogFilterSettings(object):
         raise NotImplementedError
 
     def propertyFilterSettings(self):
-        # type: () -> Mapping[Union[str, unicode], Mapping[Union[str, unicode], Level]]  # noqa: W505
+        # type: () -> Mapping[Union[str, unicode], Mapping[Union[str, unicode], Level]] # noqa: W505
         raise NotImplementedError
 
     def removePropertyFilter(self, key, value):
@@ -40,18 +55,3 @@ class LogFilterSettings(object):
     ):
         # type: (...) -> None
         raise NotImplementedError
-
-
-class Level(Enum):
-    def toLevel(self, value):
-        # type: (ch.qos.logback.classic.Level) -> Level
-        pass
-
-    def toLogBack(self):
-        # type: () -> ch.qos.logback.classic.Level
-        pass
-
-    @staticmethod
-    def values():
-        # type: () -> Iterable[Level]
-        pass

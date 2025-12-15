@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "ignition-api-stubs"
-version = "8.3.2.post1"
+version = "8.1.50.post4"
 description = "Ignition Scripting API Stubs"
 readme = "README.md"
 keywords = [
@@ -19,7 +19,7 @@ license = "MIT"
 authors = [ { name = "César Román", email = "cesar@coatl.dev" } ]
 requires-python = ">=3.9,<3.13"
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "Intended Audience :: Information Technology",
   "Intended Audience :: Manufacturing",
@@ -40,8 +40,9 @@ dependencies = [
   "types-enum34",
 ]
 urls.Funding = "https://github.com/sponsors/cesarcoatl"
-urls.Source = "https://github.com/ignition-devs/ignition-api-8.3"
-urls.Tracker = "https://github.com/ignition-devs/ignition-api-8.3/issues"
+urls.Homepage = "https://ignition-devs.github.io/ignition-api-8.1/"
+urls.Source = "https://github.com/ignition-devs/ignition-api-8.1"
+urls.Tracker = "https://github.com/ignition-devs/ignition-api-8.1/issues"
 
 [tool.setuptools]
 include-package-data = true

@@ -1,18 +1,24 @@
-from typing import Any, Union
-
-ISO8859_1: str
-US_ASCII: str
-UTF_8: str
-UTF_16: str
-UTF_16BE: str
-UTF_16LE: str
+from typing import Any, List, Optional, Union
 
 def fileExists(filepath: Union[str, unicode]) -> bool: ...
 def getTempFile(extension: Union[str, unicode]) -> Union[str, unicode]: ...
+def openFile(
+    extension: Union[str, unicode, None] = ...,
+    defaultLocation: Union[str, unicode, None] = ...,
+) -> Union[str, unicode, None]: ...
+def openFiles(
+    extension: Union[str, unicode, None] = ...,
+    defaultLocation: Union[str, unicode, None] = ...,
+) -> Optional[List[Union[str, unicode]]]: ...
 def readFileAsBytes(filepath: Union[str, unicode]) -> Any: ...
 def readFileAsString(
     filepath: Union[str, unicode], encoding: Union[str, unicode] = ...
 ) -> Union[str, unicode]: ...
+def saveFile(
+    filename: Union[str, unicode],
+    extension: Union[str, unicode, None] = ...,
+    typeDesc: Union[str, unicode, None] = ...,
+) -> Union[str, unicode, None]: ...
 def writeFile(
     filepath: Union[str, unicode],
     data: Any,

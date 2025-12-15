@@ -16,25 +16,45 @@ __all__ = [
     "SSL_FLAG",
     "WEBSTART_FLAG",
     "audit",
+    "beep",
     "execute",
+    "exit",
+    "getAvailableLocales",
+    "getAvailableTerms",
+    "getClientId",
+    "getConnectTimeout",
+    "getConnectionMode",
+    "getEdition",
+    "getGatewayAddress",
     "getGatewayStatus",
     "getGlobals",
+    "getInactivitySeconds",
+    "getLocale",
     "getLogger",
     "getModules",
     "getProjectName",
     "getProperty",
+    "getReadTimeout",
     "getSessionInfo",
+    "getSystemFlags",
     "getVersion",
     "globals",
     "invokeAsynchronous",
+    "invokeLater",
     "jsonDecode",
     "jsonEncode",
     "modifyTranslation",
+    "playSoundClip",
     "queryAuditLog",
+    "retarget",
     "sendMessage",
     "sendRequest",
     "sendRequestAsync",
+    "setConnectTimeout",
+    "setConnectionMode",
+    "setLocale",
     "setLoggingLevel",
+    "setReadTimeout",
     "threadDump",
     "translate",
 ]
@@ -45,10 +65,12 @@ import os
 import platform
 from typing import Any, Callable, Dict, Iterable, List, Optional, Union
 
-from java.lang import Thread
-from java.util import Date
+from java.awt import Toolkit
+from java.lang import IllegalArgumentException, Thread
+from java.util import Date, Locale
 
 import system.__version__ as version
+import system.security
 from com.inductiveautomation.ignition.common import BasicDataset
 from com.inductiveautomation.ignition.common.model import Version
 from com.inductiveautomation.ignition.common.script.builtin import (
@@ -106,6 +128,7 @@ def audit(
         statusCode: A quality code to attach to the object. Defaults to
             0, indicating no special meaning. Optional.
     """
+    actor = system.security.getUsername() if actor is None else actor
     print(
         action,
         actionValue,
@@ -117,6 +140,15 @@ def audit(
         originatingContext,
         statusCode,
     )
+
+
+def beep():
+    # type: () -> None
+    """Tells the computer to make a "beep" sound.
+
+    The computer must have a way of producing sound.
+    """
+    Toolkit.getDefaultToolkit().beep()
 
 
 def execute(commands):
@@ -133,6 +165,112 @@ def execute(commands):
             associated arguments (remaining entries) to execute.
     """
     print(commands)
+
+
+def exit(force=False):
+    # type: (bool) -> None
+    """Exits the running client, as long as the shutdown intercept
+    script doesn't cancel the shutdown event.
+
+    Set force to True to not give the shutdown intercept script a chance
+    to cancel the exit. Note that this will quit the Client completely.
+    You can use system.security.logout() to return to the login screen.
+
+    Args:
+        force: If True, the shutdown-intercept script will be
+            skipped. Default is False. Optional.
+    """
+    print(force)
+
+
+def getAvailableLocales():
+    # type: () -> List[Union[str, unicode]]
+    """Returns a collection of strings representing the Locales added to
+    the Translation Manager, such as 'en' for English.
+
+    Returns:
+        A collection of strings representing the Locales added to the
+        Translation Manager.
+    """
+    return ["en_US", "es_MX"]
+
+
+def getAvailableTerms():
+    # type: () -> List[Union[str, unicode]]
+    """Returns a collection of available terms defined in the
+    translation system.
+
+    Returns:
+         A collection of all of the terms available from the Translation
+         Manager, as strings.
+    """
+    return ["term1", "term2"]
+
+
+def getClientId():
+    # type: () -> unicode
+    """Returns a hex-string that represents a number unique to the
+    running Client's Session.
+
+    You are guaranteed that this number is unique between all running
+    clients.
+
+    Returns:
+        A special code representing the Client's Session in a unique
+        way.
+    """
+    return unicode("F6D410AC")
+
+
+def getConnectTimeout():
+    # type: () -> int
+    """Returns the connect timeout in milliseconds for all Client-to-
+    Gateway communication.
+
+    This is the maximum amount of time that communication operations to
+    the Gateway will be given to connect. The default is 10,000 ms (10
+    seconds).
+
+    Returns:
+        The current connect timeout, in milliseconds. Default is 10,000
+        (10 seconds).
+    """
+    return 10000
+
+
+def getConnectionMode():
+    # type: () -> int
+    """Retrieves this client session's current connection mode.
+
+    3 is read/write, 2 is read-only, and 1 is disconnected.
+
+    Returns:
+        The current connection mode for the client.
+    """
+    return 3
+
+
+def getEdition():
+    # type: () -> Union[str, unicode]
+    """Returns the "edition" of the Vision Client - "standard",
+    "limited", or "panel".
+
+    Returns:
+        The edition of the Vision module that is running the Client.
+    """
+    return "standard"
+
+
+def getGatewayAddress():
+    # type: () -> unicode
+    """Returns the address of the gateway that the client is currently
+    communicating with.
+
+    Returns:
+        The address of the Gateway that the client is communicating
+        with.
+    """
+    return unicode("http://localhost:8088/")
 
 
 def getGatewayStatus(
@@ -190,6 +328,32 @@ def getGlobals():
         The global namespace, as a dictionary.
     """
     return globals
+
+
+def getInactivitySeconds():
+    # type: () -> long
+    """Returns the number of seconds since any keyboard or mouse
+    activity.
+
+    Note:
+        This function will always return zero in the Designer.
+
+    Returns:
+        The number of seconds the mouse and keyboard have been inactive
+        for this client.
+    """
+    return long(0)
+
+
+def getLocale():
+    # type: () -> Union[str, unicode]
+    """Returns the current string representing the user's Locale, such
+    as 'en' for English.
+
+    Returns:
+        String representing the user's Locale, such as 'en' for English.
+    """
+    return "es_MX"
 
 
 def getLogger(name):
@@ -273,6 +437,21 @@ def getProperty(propertyName):
     return unicode(ret)
 
 
+def getReadTimeout():
+    # type: () -> int
+    """Returns the read timeout in milliseconds for all Client-to-
+    Gateway communication.
+
+    This is the maximum amount of time allowed for a communication
+    operation to complete. The default is 60,000 ms (1 minute).
+
+    Returns:
+         The current read timeout, in milliseconds. Default is 60,000 ms
+         (one minute).
+    """
+    return 60000
+
+
 def getSessionInfo(
     usernameFilter=None,  # type: Union[str, unicode, None]
     projectFilter=None,  # type: Union[str, unicode, None]
@@ -295,6 +474,28 @@ def getSessionInfo(
     """
     print(usernameFilter, projectFilter)
     return DatasetUtilities.PyDataSet()
+
+
+def getSystemFlags():
+    # type: () -> int
+    """Returns an integer that represents a bit field containing
+    information about the currently running system.
+
+    Each bit corresponds to a specific flag as defined in the bitmask
+    below.
+
+    The integer return will be a total of all of the bits that are
+    currently active.
+
+    Examples:
+        A full-screen client launched from the gateway webpage with no
+        SSL will have a value of 44 (Fullscreen flag + Webstart Flag +
+        Client Flag).
+
+    Returns:
+        A total of all the bits that are currently active.
+    """
+    return 1
 
 
 def getVersion():
@@ -349,6 +550,30 @@ def invokeAsynchronous(
     return Thread()
 
 
+def invokeLater(function, delay=0):
+    # type: (Callable[..., Any], int) -> None
+    """Invokes (calls) the given Python function object after all of the
+    currently processing and pending events are done being processed, or
+    after a specified delay.
+
+    The function will be executed on the GUI, or event dispatch, thread.
+    This is useful for events like propertyChange events, where the
+    script is called before any bindings are evaluated.
+
+    If you specify an optional time argument (number of milliseconds),
+    the function will be invoked after all currently processing and
+    pending events are processed plus the duration of that time.
+
+    Args:
+        function: A Python function object that will be invoked later,
+            on the GUI, or event-dispatch, thread with no arguments.
+        delay: A delay, in milliseconds, to wait before the function is
+            invoked. The default is 0, which means it will be invoked
+            after all currently pending events are processed. Optional.
+    """
+    print(function, delay)
+
+
 def jsonDecode(jsonString):
     # type: (Union[str, unicode]) -> Any
     """Takes a JSON string and converts it into a Python object such as
@@ -398,6 +623,28 @@ def modifyTranslation(
             will attempt to detect the locale automatically. Optional.
     """
     print(term, translation, locale)
+
+
+def playSoundClip(wav, volume=1.0, wait=False):
+    # type: (Any, float, bool) -> None
+    """Plays a sound clip from a wav file to the system's default audio
+    device.
+
+    The wav file can be specified as a filepath, a URL, or directly as a
+    raw byte array.
+
+    Args:
+        wav: A byte list of a wav file or filepath or URL that
+            represents a wav file.
+        volume: The clip's volume, represented as a floating point
+            number between 0.0 and 1.0. Optional.
+        wait: A boolean flag indicating whether or not the call to
+            playSoundClip should block further script execution within
+            the triggering event until the clip finishes. Useful in
+            cases where code on lines after the playSoundClip call
+            should wait until the sound clip finishes playing. Optional.
+    """
+    print(wav, volume, wait)
 
 
 def queryAuditLog(
@@ -453,6 +700,54 @@ def queryAuditLog(
         contextFilter,
     )
     return BasicDataset()
+
+
+def retarget(
+    project,  # type: Union[str, unicode]
+    addresses=None,  # type: Optional[Union[str, unicode, List[Union[str, unicode]]]]
+    params=None,  # type: Optional[Dict[Union[str, unicode], Any]]
+    windows=None,  # type: Optional[List[Union[str, unicode]]]
+):
+    # type: (...) -> None
+    """This function allows you to programmatically 'retarget' the
+    Client to a different project and/or different Gateway.
+
+    You can have it switch to another project on the same Gateway, or
+    another gateway entirely, even across a WAN. This feature makes the
+    vision of a seamless, enterprise-wide SCADA application a reality.
+
+    The retarget feature will attempt to transfer the current user
+    credentials over to the new project / Gateway. If the credentials
+    fail on that project, the user will be prompted for a valid username
+    and password. Once valid authentication has been achieved, the
+    currently running project is shut down, and the new project is
+    loaded.
+
+    You can pass any information to the other project through the
+    parameters dictionary. All entries in this dictionary will be set in
+    the global scripting namespace in the other project. Even if you
+    don't specify any parameters, the system will set the variable
+    _RETARGET_FROM_PROJECT to the name of the current project and
+    _RETARGET_FROM_GATEWAY to the address of the current Gateway.
+
+    Args:
+        project: The name of the project to retarget to.
+        addresses: The address of the Gateway that the project resides
+            on. Format is host:port when not using SSL/TLS, or
+            https://host:port when SSL/TLS is enabled on the target
+            gateway. This can be a list of strings. When using a list,
+            the function will try each address in order, waiting for the
+            timeout period between each address attempt. Optional.
+        params: A dictionary of parameters that will be passed to the
+            new project. They will be set as global variables in the new
+            project's Python scripting environment. Optional.
+        windows: A list of window paths to use as the startup windows.
+            If omitted, the project's normal startup windows will be
+            opened. If specified, the project's normal startup windows
+            will be ignored, and this list will be used instead.
+            Optional.
+    """
+    print(project, addresses, params, windows)
 
 
 def sendMessage(
@@ -630,6 +925,57 @@ def sendRequestAsync(
     return SystemUtilities.RequestImpl(1000)
 
 
+def setConnectTimeout(connectTimeout):
+    # type: (int) -> None
+    """Sets the connect timeout for Client-to-Gateway communication.
+
+    Specified in milliseconds.
+
+    Args:
+        connectTimeout: The new connect timeout, specified in
+            milliseconds.
+    """
+    print(connectTimeout)
+
+
+def setConnectionMode(mode):
+    # type: (int) -> None
+    """Sets the connection mode for the client session.
+
+    Normally a client runs in mode 3, which is read-write. You may wish
+    to change this to mode 2, which is read-only, which will only allow
+    reading and subscribing to tags, and running SELECT queries. Tag
+    writes and INSERT / UPDATE / DELETE queries will not function. You
+    can also set the connection mode to mode 1, which is disconnected,
+    all tag and query features will not work.
+
+    Args:
+        mode: The new connection mode. 1 = Disconnected, 2 = Read-only,
+            3 = Read/Write.
+    """
+    print(mode)
+
+
+def setLocale(locale):
+    # type: (Union[str, unicode, Locale]) -> None
+    """Sets the user's current Locale.
+
+    Any valid Java locale code (case-insensitive) can be used as a
+    parameter, including ones that have not yet been added to the
+    Translation Manager.
+
+    Args:
+        locale: A locale code, such as 'en_US' for US English, or a
+            java.util.Locale object.
+
+    Raises:
+        IllegalArgumentException: If passed an invalid local code.
+    """
+    if not locale:
+        raise IllegalArgumentException("Invalid locale code")
+    print(locale)
+
+
 def setLoggingLevel(loggerName, loggerLevel):
     # type: (Union[str, unicode], Union[str, unicode]) -> None
     """Sets the logging level on the given logger.
@@ -644,6 +990,19 @@ def setLoggingLevel(loggerName, loggerLevel):
             "debug", "info", "warn" or "error".
     """
     print(loggerName, loggerLevel)
+
+
+def setReadTimeout(readTimeout):
+    # type: (int) -> None
+    """Sets the read timeout for Client-to-Gateway communication.
+
+    Specified in milliseconds.
+
+    Args:
+        readTimeout: The new read timeout, specified in
+            milliseconds.
+    """
+    print(readTimeout)
 
 
 def threadDump():
@@ -661,7 +1020,7 @@ def threadDump():
 def translate(
     term,  # type: Union[str, unicode]
     locale="es_MX",  # type: Union[str, unicode]
-    strict=False,  # type: Optional[bool]
+    strict=False,  # type: bool
 ):
     # type: (...) -> Union[str, unicode]
     """This function allows you to retrieve the global translation of a

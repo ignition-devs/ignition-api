@@ -12,6 +12,8 @@ from com.codahale.metrics import Timer
 from com.inductiveautomation.ignition.common.script.hints import ScriptFunctionHint
 from org.python.core import PyObject, PyStringMap, PySystemState
 
+HintsMap = Mapping[Union[str, unicode], List[ScriptFunctionHint]]
+
 
 class ScriptFunction(object):
     def invoke(self, *args):
@@ -107,7 +109,7 @@ class ScriptManager(Object):
         pass
 
     def getHintsMap(self):
-        # type: () -> Mapping[Union[str, unicode], List[ScriptFunctionHint]]  # noqa: W505
+        # type: () -> HintsMap
         pass
 
     def getModules(self):

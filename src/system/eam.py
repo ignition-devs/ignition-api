@@ -24,7 +24,7 @@ def getGroups():
     This function should only be called from the Controller.
 
     Note:
-        If called from an Agent, this function will return an
+        If called from an Agent on 8.1.11+, this function will return an
         exception.
 
     Returns:
@@ -46,7 +46,7 @@ def queryAgentHistory(
     This function should only be called from the Controller.
 
     Note:
-        If called from an Agent, this function will return an
+        If called from an Agent on 8.1.11+, this function will return an
         exception.
 
     Args:
@@ -82,7 +82,7 @@ def queryAgentStatus(
     This function should only be called from the Controller.
 
     Note:
-        If called from an Agent, this function will return an
+        If called from an Agent on 8.1.11+, this function will return an
         exception.
 
     Args:
@@ -120,7 +120,7 @@ def runTask(taskname):
     permission is disabled by default.
 
     Note:
-        If called from an Agent, this function will return an
+        If called from an Agent on 8.1.11+, this function will return an
         exception.
 
     Args:

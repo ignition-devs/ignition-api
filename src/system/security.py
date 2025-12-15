@@ -9,11 +9,33 @@ with Vision Clients.
 from __future__ import print_function
 
 __all__ = [
+    "getRoles",
     "getUserRoles",
+    "getUsername",
+    "isScreenLocked",
+    "lockScreen",
+    "logout",
+    "switchUser",
+    "unlockScreen",
     "validateUser",
 ]
 
+import getpass
 from typing import Optional, Tuple, Union
+
+from java.util import EventObject
+
+
+def getRoles():
+    # type: () -> Tuple[Union[str, unicode], ...]
+    """Finds the roles that the currently logged in user has, returns
+    them as a Python tuple of strings.
+
+    Returns:
+        A list of the roles (strings) that are assigned to the current
+        user.
+    """
+    return "Administrator", "Developer"
 
 
 def getUserRoles(
@@ -45,6 +67,89 @@ def getUserRoles(
     """
     print(username, password, authProfile, timeout)
     return "Administrator", "Developer"
+
+
+def getUsername():
+    # type: () -> Union[str, unicode]
+    """Returns the currently logged-in username.
+
+    Returns:
+        The current username.
+    """
+    return getpass.getuser()
+
+
+def isScreenLocked():
+    # type: () -> bool
+    """Returns whether or not the screen is currently locked.
+
+    Returns:
+        A flag indication whether or not the screen is currently locked.
+    """
+    return False
+
+
+def lockScreen(obscure=False):
+    # type: (bool) -> None
+    """Used to put a running Client in lock-screen mode.
+
+    The screen can be unlocked by the user with the proper credentials,
+    or by scripting via the system.security.unlockScreen() function.
+
+    Args:
+        obscure: If True, the locked screen will be opaque, otherwise
+            it will be partially visible. Optional.
+    """
+    print(obscure)
+
+
+def logout():
+    # type: () -> None
+    """Logs out of the Client for the current user and brings the Client
+    to the login screen.
+    """
+    pass
+
+
+def switchUser(
+    username,  # type: Union[str, unicode]
+    password,  # type: Union[str, unicode]
+    event,  # type: EventObject
+    hideError=False,  # type: bool
+):
+    # type: (...) -> bool
+    """Attempts to switch the current user on the fly.
+
+    If the given username and password fail, this function will return
+    False. If it succeeds, then all currently opened windows are closed,
+    the user is switched, and windows are then re-opened in the states
+    that they were in.
+
+    If an event object is passed to this function, the parent window of
+    the event object will not be re-opened after a successful user
+    switch. This is to support the common case of having a switch-user
+    screen that you want to disappear after the switch takes place.
+
+    Args:
+        username: The username to try and switch to.
+        password: The password to authenticate with.
+        event: If specified, the enclosing window for this event's
+            component will be closed in the switch user process.
+        hideError: If True, no error will be shown if the switch
+            user function fails. Default is False. Optional.
+
+    Returns:
+        False if the switch user operation failed, True
+        otherwise.
+    """
+    print(username, password, event, hideError)
+    return True
+
+
+def unlockScreen():
+    # type: () -> None
+    """Unlocks the Client, if it is currently in lock-screen mode."""
+    pass
 
 
 def validateUser(

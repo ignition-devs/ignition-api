@@ -1,14 +1,17 @@
 from typing import Any, Dict, List, Optional, Type, Union
 
 from com.inductiveautomation.ignition.common import Dataset
+from com.inductiveautomation.ignition.common.script.builtin import DatasetUtilities
 from java.util import Date, Locale
+
+ColType = Union[float, long, int, str, unicode, Date]
 
 def addColumn(
     dataset: Dataset,
     colIndex: int,
     col: List[Any],
     colName: Union[str, unicode],
-    colType: Type[Union[Union[float, int, long], Union[str, unicode], Date]],
+    colType: Type[ColType],
 ) -> Dataset: ...
 def addRow(dataset: Dataset, rowIndex: int, row: List[Any]) -> Dataset: ...
 def addRows(dataset: Dataset, rowIndex: int, rows: List[List[Any]]) -> Dataset: ...
@@ -19,6 +22,21 @@ def dataSetToHTML(
 ) -> Union[str, unicode]: ...
 def deleteRow(dataset: Dataset, rowIndex: int) -> Dataset: ...
 def deleteRows(dataset: Dataset, rowIndices: List[int]) -> Dataset: ...
+def exportCSV(
+    filename: Union[str, unicode], showHeaders: bool, dataset: Dataset
+) -> Union[str, unicode]: ...
+def exportExcel(
+    filename: Union[str, unicode],
+    showHeaders: bool,
+    dataset: Union[Dataset, List[Dataset]],
+    nullsEmpty: bool = ...,
+) -> Union[str, unicode]: ...
+def exportHTML(
+    filename: Union[str, unicode],
+    showHeaders: bool,
+    dataset: Dataset,
+    title: Union[str, unicode],
+) -> Union[str, unicode]: ...
 def filterColumns(
     dataset: Dataset, columns: Union[List[Union[str, unicode]], List[int]]
 ) -> Dataset: ...
@@ -52,6 +70,7 @@ def toExcel(
     nullsEmpty: bool = ...,
     sheetNames: Optional[List[Union[str, unicode]]] = ...,
 ) -> Any: ...
+def toPyDataSet(dataset: Dataset) -> DatasetUtilities.PyDataSet: ...
 def updateRow(
     dataset: Dataset, rowIndex: int, changes: Dict[Union[str, unicode], Any]
 ) -> Dataset: ...

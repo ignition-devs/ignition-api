@@ -377,7 +377,7 @@ class DataValidationHelper:
     ) -> DataValidationConstraint: ...
     def createDecimalConstraint(
         self,
-        operatorType: int,
+        peratorType: int,
         formula1: Union[str, unicode],
         formula2: Union[str, unicode],
     ) -> DataValidationConstraint: ...

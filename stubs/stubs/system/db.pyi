@@ -1,10 +1,12 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from com.inductiveautomation.ignition.common import BasicDataset
 from com.inductiveautomation.ignition.common.script.builtin import (
     DatasetUtilities,
     SProcCall,
 )
+from java.util import Date
+from javax.swing import JComponent
 
 BIT: int
 REAL: int
@@ -65,8 +67,9 @@ def beginTransaction(
     isolationLevel: Optional[int] = ...,
     timeout: Optional[int] = ...,
 ) -> Union[str, unicode]: ...
-def clearQueryCache(
-    project: Union[str, unicode, None] = ..., path: Union[str, unicode, None] = ...
+def clearAllNamedQueryCaches(project: Union[str, unicode, None] = ...) -> None: ...
+def clearNamedQueryCache(
+    *args: Union[str, unicode], **kwargs: Union[str, unicode]
 ) -> None: ...
 def closeTransaction(tx: Union[str, unicode]) -> None: ...
 def commitTransaction(tx: Union[str, unicode]) -> None: ...
@@ -76,35 +79,16 @@ def createSProcCall(
     tx: Union[str, unicode, None] = ...,
     skipAudit: bool = ...,
 ) -> SProcCall: ...
-def execQuery(
-    path: Union[str, unicode],
-    parameters: Optional[Dict[Union[str, unicode], Any]] = ...,
-    tx: Union[str, unicode, None] = ...,
-    project: Union[str, unicode, None] = ...,
-) -> Any: ...
+def dateFormat(
+    date: Date, formatPattern: Union[str, unicode]
+) -> Union[str, unicode]: ...
 def execSProcCall(callContext: SProcCall) -> None: ...
-def execScalar(
-    path: Union[str, unicode],
-    parameters: Optional[Dict[Union[str, unicode], Any]] = ...,
-    tx: Union[str, unicode, None] = ...,
-    project: Union[str, unicode, None] = ...,
-) -> Optional[Union[float, int, long]]: ...
-def execUpdate(
-    path: Union[str, unicode],
-    parameters: Optional[Dict[Union[str, unicode], Any]] = ...,
-    tx: Union[str, unicode, None] = ...,
-    getKey: bool = ...,
-    project: Union[str, unicode, None] = ...,
-) -> int: ...
-def execUpdateAsync(
-    path: Union[str, unicode],
-    parameters: Optional[Dict[Union[str, unicode], Any]] = ...,
-    project: Union[str, unicode, None] = ...,
-) -> bool: ...
 def getConnectionInfo(name: Union[str, unicode, None] = ...) -> BasicDataset: ...
 def getConnections() -> BasicDataset: ...
+def refresh(component: JComponent, propertyName: Union[str, unicode]) -> bool: ...
 def removeDatasource(name: Union[str, unicode]) -> None: ...
 def rollbackTransaction(tx: Union[str, unicode]) -> None: ...
+def runNamedQuery(*args: Any, **kwargs: Any) -> Any: ...
 def runPrepQuery(
     query: Union[str, unicode],
     args: List[Any],
@@ -119,12 +103,26 @@ def runPrepUpdate(
     getKey: bool = ...,
     skipAudit: bool = ...,
 ) -> int: ...
+def runQuery(
+    query: Union[str, unicode],
+    database: Union[str, unicode] = ...,
+    tx: Union[str, unicode, None] = ...,
+) -> DatasetUtilities.PyDataSet: ...
+def runSFNamedQuery(*args: Any, **kwargs: Any) -> bool: ...
 def runSFPrepUpdate(
     query: Union[str, unicode], args: List[Any], datasources: List[Union[str, unicode]]
+) -> bool: ...
+def runSFUpdateQuery(
+    query: Union[str, unicode], datasources: List[Union[str, unicode]]
 ) -> bool: ...
 def runScalarPrepQuery(
     query: Union[str, unicode],
     args: List[Any],
+    database: Union[str, unicode] = ...,
+    tx: Union[str, unicode, None] = ...,
+) -> Any: ...
+def runScalarQuery(
+    query: Union[str, unicode],
     database: Union[str, unicode] = ...,
     tx: Union[str, unicode, None] = ...,
 ) -> Any: ...

@@ -13,7 +13,6 @@ __all__ = [
     "getRoster",
     "getRosterNames",
     "getRosters",
-    "getUsers",
     "removeUsers",
 ]
 
@@ -41,11 +40,8 @@ def addUsers(rosterName, users):
         print(user.Username)
 
 
-def createRoster(
-    name,  # type: Union[str, unicode]
-    description,  # type: Union[str, unicode, None]
-):
-    # type: (...) -> None
+def createRoster(name, description):
+    # type: (Union[str, unicode], Union[str, unicode, None]) -> None
     """Creates a roster with the given name and description, if it does
     not already exist.
 
@@ -111,21 +107,6 @@ def getRosters():
         been added to the roster.
     """
     return {}
-
-
-def getUsers(rosterName):
-    # type: (Union[str, unicode]) -> List[PyUser]
-    """Returns the list of users corresponding to the given rosterName.
-
-    Args:
-        rosterName: TThe name of the roster, not null
-
-    Returns:
-        A list of User objects in the roster. If no users have been
-        added to the roster, an empty list is returned.
-    """
-    print(rosterName)
-    return []
 
 
 def removeUsers(rosterName, users):

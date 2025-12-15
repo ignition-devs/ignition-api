@@ -1,7 +1,6 @@
 from __future__ import print_function
 
 __all__ = ["PyComponentWrapper"]
-
 from typing import Union
 
 from java.lang import Object

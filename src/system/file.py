@@ -6,31 +6,20 @@ The following functions give you access to read and write to files.
 from __future__ import print_function
 
 __all__ = [
-    "ISO8859_1",
-    "US_ASCII",
-    "UTF_16",
-    "UTF_16BE",
-    "UTF_16LE",
-    "UTF_8",
     "fileExists",
     "getTempFile",
+    "openFile",
+    "openFiles",
     "readFileAsBytes",
     "readFileAsString",
+    "saveFile",
     "writeFile",
 ]
 
 import io
 import os.path
 import tempfile
-from typing import Any, Union
-
-# Encoding Constants
-ISO8859_1 = "ISO-8859-1"
-US_ASCII = "US-ASCII"
-UTF_8 = "UTF-8"
-UTF_16 = "UTF-16"
-UTF_16BE = "UTF-16BE"
-UTF_16LE = "UTF-16LE"
+from typing import Any, List, Optional, Union
 
 
 def fileExists(filepath):
@@ -73,6 +62,56 @@ def getTempFile(extension):
     suffix = ".{}".format(extension)
     with tempfile.NamedTemporaryFile(suffix=suffix) as temp:
         return unicode(temp.name)
+
+
+def openFile(
+    extension=None,  # type: Union[str, unicode, None]
+    defaultLocation=None,  # type: Union[str, unicode, None]
+):
+    # type: (...) -> Union[str, unicode, None]
+    r"""Shows an "Open File" dialog box, prompting the user to choose a
+    file to open.
+
+    Returns the path to the file that the user chose, or None if the
+    user canceled the dialog box. An extension can optionally be passed
+    in that sets the filetype filter to that extension.
+
+    Args:
+        extension: A file extension, like "pdf", to try to open.
+            Optional.
+        defaultLocation: A folder location, like "C:\\MyFiles", to use
+            as the starting location for the file chooser. Optional.
+
+    Returns:
+        The path to the selected file, or None if canceled.
+    """
+    print(extension, defaultLocation)
+    return ""
+
+
+def openFiles(
+    extension=None,  # type: Union[str, unicode, None]
+    defaultLocation=None,  # type: Union[str, unicode, None]
+):
+    # type: (...) -> Optional[List[Union[str, unicode]]]
+    r"""Shows an "Open File" dialog box, prompting the user to choose a
+    file or files to open.
+
+    Returns the paths to the files that the user chooses, or None if the
+    user canceled the dialog box. An extension can optionally be passed
+    in that sets the filetype filter to that extension.
+
+    Args:
+        extension: A file extension, like "pdf", to try to open.
+            Optional.
+        defaultLocation: A folder location, like "C:\\MyFiles", to use
+            as the starting location for the file chooser. Optional.
+
+    Returns:
+        The paths to the selected files, or None if canceled.
+    """
+    print(extension, defaultLocation)
+    return ["path/to/file"]
 
 
 def readFileAsBytes(filepath):
@@ -131,6 +170,34 @@ def readFileAsString(
     """
     with io.open(filepath, "r", encoding=encoding) as f:
         return unicode(f.read())
+
+
+def saveFile(
+    filename,  # type: Union[str, unicode]
+    extension=None,  # type: Union[str, unicode, None]
+    typeDesc=None,  # type: Union[str, unicode, None]
+):
+    # type: (...) -> Union[str, unicode, None]
+    """Prompts the user to save a new file named filename.
+
+    The optional extension and typeDesc arguments can be added to be
+    used as a type filter. If the user accepts the save, the path to
+    that file will be returned. If the user cancels the save, None will
+    be returned.
+
+    Args:
+        filename: A file name to suggest to the user.
+        extension: The appropriate file extension, like "jpeg", for the
+            file. Optional.
+        typeDesc: A description of the extension, like "JPEG Image".
+            Optional.
+
+    Returns:
+        The path to the file that the user decided to save to, or None
+        if they canceled.
+    """
+    print(filename, extension, typeDesc)
+    return ""
 
 
 def writeFile(

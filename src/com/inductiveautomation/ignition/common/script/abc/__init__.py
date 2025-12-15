@@ -21,7 +21,7 @@ from org.python.core import PyInteger, PyList, PyObject, PySequence
 class JythonMap(object):
 
     def __finditem__(self, key):
-        # type: (Union[int, PyObject, Union[str, unicode]]) -> PyObject
+        # type: (Union[int, str, unicode, PyObject]) -> PyObject
         raise NotImplementedError
 
     def get(self, pyKey, def_=None):
@@ -73,23 +73,23 @@ class JythonSequence(object):
 
     def count(self, element):
         # type: (PyObject) -> PyInteger
-        pass
+        raise NotImplementedError
 
     def index(self, element):
         # type: (PyObject) -> int
-        pass
+        raise NotImplementedError
 
     def __iter__(self):
         # type: () -> Iterator[Any]
-        pass
+        raise NotImplementedError
 
     def __contains__(self, o):
         # type: (PyObject) -> bool
-        pass
+        raise NotImplementedError
 
     def __len__(self):
         # type: () -> int
-        pass
+        raise NotImplementedError
 
     def __mul__(self, other):
         # type: (PyObject) -> PyObject
@@ -97,7 +97,7 @@ class JythonSequence(object):
 
     def __rmul__(self, other):
         # type: (PyObject) -> PyObject
-        pass
+        raise NotImplementedError
 
 
 class MutableJythonMap(object):
@@ -137,8 +137,16 @@ class MutableJythonSequence(JythonSequence):
         # type: (PyObject) -> None
         raise NotImplementedError
 
+    def count(self, element):
+        # type: (PyObject) -> PyInteger
+        raise NotImplementedError
+
     def extend(self, sequence):
         # type: (PyObject) -> None
+        raise NotImplementedError
+
+    def index(self, element):
+        # type: (PyObject) -> int
         raise NotImplementedError
 
     def insert(self, index, element):
@@ -157,7 +165,27 @@ class MutableJythonSequence(JythonSequence):
         # type: (*PyObject, **Union[str, unicode]) -> None
         raise NotImplementedError
 
+    def __iter__(self):
+        # type: () -> Iterator[Any]
+        raise NotImplementedError
+
+    def __contains__(self, o):
+        # type: (PyObject) -> bool
+        raise NotImplementedError
+
+    def __len__(self):
+        # type: () -> int
+        raise NotImplementedError
+
     def __add__(self, other):
+        # type: (PyObject) -> PyObject
+        raise NotImplementedError
+
+    def __mul__(self, other):
+        # type: (PyObject) -> PyObject
+        pass
+
+    def __rmul__(self, other):
         # type: (PyObject) -> PyObject
         raise NotImplementedError
 
@@ -169,7 +197,7 @@ class MutableJythonSequence(JythonSequence):
 class AbstractJythonMap(JythonMap):
 
     def __finditem__(self, key):
-        # type: (Union[int, PyObject, Union[str, unicode]]) -> PyObject
+        # type: (Union[int, str, unicode, PyObject]) -> PyObject
         pass
 
     def get(self, pyKey, def_=None):
@@ -222,6 +250,26 @@ class AbstractJythonSequence(PySequence, JythonSequence):
         # type: (Class) -> None
         print(clazz)
         super(AbstractJythonSequence, self).__init__()
+
+    def count(self, element):
+        # type: (PyObject) -> PyInteger
+        pass
+
+    def index(self, element):
+        # type: (PyObject) -> int
+        pass
+
+    def __len__(self):
+        # type: () -> int
+        pass
+
+    def __add__(self, other):
+        # type: (PyObject) -> PyObject
+        raise NotImplementedError
+
+    def __mul__(self, other):
+        # type: (PyObject) -> PyObject
+        pass
 
 
 class AbstractMutableJythonMap(MutableJythonMap):
@@ -279,4 +327,8 @@ class AbstractMutableJythonSequence(AbstractJythonSequence, MutableJythonSequenc
 
     def sort(self, *args, **kwargs):
         # type: (*PyObject, **Union[str, unicode]) -> None
+        pass
+
+    def __add__(self, other):
+        # type: (PyObject) -> PyObject
         pass

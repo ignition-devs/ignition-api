@@ -1101,7 +1101,7 @@ class DataValidationHelper(object):
 
     def createDecimalConstraint(
         self,
-        operatorType,  # type: int
+        peratorType,  # type: int
         formula1,  # type: Union[str, unicode]
         formula2,  # type: Union[str, unicode]
     ):

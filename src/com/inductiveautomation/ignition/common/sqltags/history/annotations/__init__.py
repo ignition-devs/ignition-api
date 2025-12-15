@@ -56,7 +56,7 @@ class Annotation(Object):
 
         def type(
             self,
-            arg,  # type: Union[str, unicode, AnnotationType]
+            arg,  # type: Union[AnnotationType, str, unicode]
         ):
             # type: (...) -> Annotation.Builder
             pass

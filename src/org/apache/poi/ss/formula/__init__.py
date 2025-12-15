@@ -24,7 +24,6 @@ if TYPE_CHECKING:
     from org.apache.poi.ss.formula.ptg import (
         Area3DPtg,
         Area3DPxg,
-        NamePtg,
         NameXPtg,
         NameXPxg,
         Ptg,
@@ -191,7 +190,7 @@ class EvaluationWorkbook(object):
 
     def getName(
         self,
-        name,  # type: Union[str, unicode, NamePtg]
+        name,  # type: Union[str, unicode]
         sheetIndex=None,  # type: Optional[int]
     ):
         # type: (...) -> ExternalName

@@ -1,9 +1,6 @@
 from typing import Any, Dict, List, Optional, Union
 
 from com.inductiveautomation.ignition.common import BasicDataset
-from com.inductiveautomation.reporting.common.api import (  # noqa: F401
-    QueryResults as QueryResults,
-)
 
 def executeAndDistribute(
     path: Union[str, unicode],

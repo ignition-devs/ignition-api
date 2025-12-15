@@ -1,7 +1,8 @@
-from typing import Any, Callable, List, Optional, Union
+from typing import Any, Callable, Dict, List, Optional, Union
 
 from com.inductiveautomation.ignition.common.script.builtin.http import JythonHttpClient
 
+def getExternalIpAddress() -> Union[str, unicode]: ...
 def getHostName() -> Union[str, unicode]: ...
 def getIpAddress() -> Union[str, unicode]: ...
 def getRemoteServers(
@@ -18,6 +19,34 @@ def httpClient(
     version: Union[str, unicode] = ...,
     customizer: Optional[Callable[..., Any]] = ...,
 ) -> JythonHttpClient: ...
+def httpDelete(
+    url: Union[str, unicode],
+    contentType: Union[str, unicode, None] = ...,
+    connectTimeout: int = ...,
+    readTimeout: int = ...,
+    username: Union[str, unicode, None] = ...,
+    password: Union[str, unicode, None] = ...,
+    headerValues: Optional[Dict[Union[str, unicode], Union[str, unicode]]] = ...,
+    bypassCertValidation: bool = ...,
+) -> Union[str, unicode]: ...
+def httpGet(
+    url: Union[str, unicode],
+    connectTimeout: int = ...,
+    readTimeout: int = ...,
+    username: Union[str, unicode, None] = ...,
+    password: Union[str, unicode, None] = ...,
+    headerValues: Optional[Dict[Union[str, unicode], Union[str, unicode]]] = ...,
+    bypassCertValidation: Optional[bool] = ...,
+    useCaches: bool = ...,
+    throwOnError: bool = ...,
+) -> Union[str, unicode]: ...
+def httpPost(
+    url: Union[str, unicode], *args: Any, **kwargs: Any
+) -> Union[str, unicode]: ...
+def httpPut(
+    url: Union[str, unicode], *args: Any, **kwargs: Any
+) -> Union[str, unicode]: ...
+def openURL(url: Union[str, unicode], useApplet: Optional[bool] = ...) -> None: ...
 def sendEmail(
     smtp: Union[str, unicode, None] = ...,
     fromAddr: Union[str, unicode] = ...,

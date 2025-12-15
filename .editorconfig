@@ -13,12 +13,12 @@ indent_size = 2
 indent_style = space
 insert_final_newline = false
 
-[*.{ini,md,toml,yaml,yml}]
+[*.{md,toml,yaml,yml}]
 indent_size = 2
 indent_style = space
 insert_final_newline = true
 
-[*.{py,pyi}]
+[*.{ini,py,pyi}]
 indent_size = 4
 indent_style = space
 insert_final_newline = true

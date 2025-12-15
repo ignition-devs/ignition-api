@@ -26,22 +26,16 @@ __all__ = [
     "DATA_BITS_6",
     "DATA_BITS_7",
     "DATA_BITS_8",
-    "DEFAULT_BIT_RATE",
-    "DEFAULT_DATA_BITS",
-    "DEFAULT_FLOW_CONTROL",
-    "DEFAULT_HANDSHAKE",
-    "DEFAULT_HARDWARE_FLOW_CONTROL",
-    "DEFAULT_PARITY",
-    "DEFAULT_READ_TIMEOUT_MS",
-    "DEFAULT_STOP_BITS",
-    "DEFAULT_WRITE_TIMEOUT_MS",
-    "FLOW_CONTROL_CTS_ENABLED",
-    "FLOW_CONTROL_DISABLED",
-    "FLOW_CONTROL_DSR_ENABLED",
-    "FLOW_CONTROL_DTR_ENABLED",
-    "FLOW_CONTROL_RTS_ENABLED",
-    "FLOW_CONTROL_XONXOFF_IN_ENABLED",
-    "FLOW_CONTROL_XONXOFF_OUT_ENABLED",
+    "HANDSHAKE_CTS_DTR",
+    "HANDSHAKE_CTS_RTS",
+    "HANDSHAKE_DSR_DTR",
+    "HANDSHAKE_HARD_IN",
+    "HANDSHAKE_HARD_OUT",
+    "HANDSHAKE_NONE",
+    "HANDSHAKE_SOFT_IN",
+    "HANDSHAKE_SOFT_OUT",
+    "HANDSHAKE_SPLIT_MASK",
+    "HANDSHAKE_XON_XOFF",
     "PARITY_EVEN",
     "PARITY_MARK",
     "PARITY_NONE",
@@ -62,7 +56,6 @@ __all__ = [
     "writeBytes",
 ]
 
-import sys
 from typing import Any, List, Optional, Union
 
 from com.inductiveautomation.ignition.modules.serial.scripting import SerialScriptModule
@@ -90,25 +83,17 @@ DATA_BITS_6 = 6
 DATA_BITS_7 = 7
 DATA_BITS_8 = 8
 
-# Default constants.
-DEFAULT_BIT_RATE = 9600
-DEFAULT_DATA_BITS = 8
-DEFAULT_FLOW_CONTROL = 0
-DEFAULT_HANDSHAKE = 0
-DEFAULT_HARDWARE_FLOW_CONTROL = False
-DEFAULT_PARITY = 0
-DEFAULT_READ_TIMEOUT_MS = 5000
-DEFAULT_STOP_BITS = 1
-DEFAULT_WRITE_TIMEOUT_MS = 5000
-
-# Flow Control constants.
-FLOW_CONTROL_CTS_ENABLED = 16
-FLOW_CONTROL_DISABLED = 0
-FLOW_CONTROL_DSR_ENABLED = 256
-FLOW_CONTROL_DTR_ENABLED = 4096
-FLOW_CONTROL_RTS_ENABLED = 1
-FLOW_CONTROL_XONXOFF_IN_ENABLED = 65536
-FLOW_CONTROL_XONXOFF_OUT_ENABLED = 1048576
+# Handshake constants.
+HANDSHAKE_CTS_DTR = 4112
+HANDSHAKE_CTS_RTS = 17
+HANDSHAKE_DSR_DTR = 4352
+HANDSHAKE_HARD_IN = 0
+HANDSHAKE_HARD_OUT = 0
+HANDSHAKE_NONE = 0
+HANDSHAKE_SOFT_IN = 65536
+HANDSHAKE_SOFT_OUT = 1048576
+HANDSHAKE_SPLIT_MASK = 0
+HANDSHAKE_XON_XOFF = 1114112
 
 # Parity constants.
 PARITY_EVEN = 2
@@ -400,7 +385,7 @@ def write(
     port,  # type: Union[str, unicode]
     toWrite,  # type: Union[str, unicode]
     timeout=5000,  # type: int
-    encoding=None,  # type: Union[str, unicode, None]
+    encoding="utf-8",  # type: Union[str, unicode]
 ):
     # type: (...) -> None
     """Write a string to a serial port using the platforms default
@@ -413,9 +398,7 @@ def write(
         encoding: Encoding to use when constructing the string. Defaults
             to the platform's default character set. Optional.
     """
-    if encoding is None:
-        encoding = sys.getdefaultencoding()
-    print(port, toWrite, timeout, encoding)
+    print(port, toWrite, encoding)
 
 
 def writeBytes(port, toWrite, timeout=5000):

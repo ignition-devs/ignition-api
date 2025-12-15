@@ -1,4 +1,4 @@
 """Package information."""
 
-__version__ = "8.3.2"
-__build__ = "2025120210"
+__version__ = "8.1.50"
+__build__ = "2025093011"

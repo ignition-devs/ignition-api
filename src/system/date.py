@@ -6,25 +6,6 @@ The following functions give you access to test and modify dates.
 from __future__ import print_function
 
 __all__ = [
-    "APRIL",
-    "AUGUST",
-    "DECEMBER",
-    "FEBRUARY",
-    "FRIDAY",
-    "JANUARY",
-    "JULY",
-    "JUNE",
-    "MARCH",
-    "MAY",
-    "MONDAY",
-    "NOVEMBER",
-    "OCTOBER",
-    "SATURDAY",
-    "SEPTEMBER",
-    "SUNDAY",
-    "THURSDAY",
-    "TUESDAY",
-    "WEDNESDAY",
     "addDays",
     "addHours",
     "addMillis",
@@ -75,29 +56,6 @@ from time import localtime, mktime
 from typing import Optional, Union
 
 from java.util import Date, Locale
-
-# Month constants
-APRIL = 3
-AUGUST = 7
-DECEMBER = 11
-FEBRUARY = 1
-JANUARY = 0
-JULY = 6
-JUNE = 5
-MARCH = 2
-MAY = 4
-NOVEMBER = 10
-OCTOBER = 9
-SEPTEMBER = 8
-
-# Day of week constants
-FRIDAY = 6
-MONDAY = 2
-SATURDAY = 7
-SUNDAY = 1
-THURSDAY = 5
-TUESDAY = 3
-WEDNESDAY = 4
 
 
 def _now():

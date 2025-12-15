@@ -2,11 +2,10 @@ from __future__ import print_function
 
 __all__ = [
     "ClientDatasetUtilities",
-    "ClientPrintUtilities",
     "ClientSystemUtilities",
     "INavUtilities",
     "NavUtilities",
-    "VisionUtilities",
+    "PrintUtilities",
     "WindowUtilities",
 ]
 
@@ -17,12 +16,11 @@ from java.awt.event import ActionEvent, ComponentEvent, MouseEvent
 from java.awt.image import BufferedImage
 from java.awt.print import PageFormat
 from java.lang import Number, Object
-from java.util import EventObject, Locale
+from java.util import EventObject
 from javax.swing import JComponent, JFrame, JPopupMenu
 
 from com.inductiveautomation.factorypmi.application import FPMIApp, FPMIWindow
 from com.inductiveautomation.factorypmi.application.script import PyComponentWrapper
-from com.inductiveautomation.ignition.common.i18n.keyboard import KeyboardLayout
 from com.inductiveautomation.ignition.common.model.values import QualityCode
 from org.python.core import PyObject, PySequence, PyTuple
 
@@ -178,12 +176,12 @@ class NavUtilities(INavUtilities):
         pass
 
 
-class ClientPrintUtilities(Object):
+class PrintUtilities(Object):
 
     class ComponentPrinter(Object):
         def __init__(self, c, fit, zoom):
             # type: (Component, bool, float) -> None
-            super(ClientPrintUtilities.ComponentPrinter, self).__init__()
+            super(PrintUtilities.ComponentPrinter, self).__init__()
             print(c, fit, zoom)
 
         def print(self, g, pageFormat, pageIndex):
@@ -193,7 +191,7 @@ class ClientPrintUtilities(Object):
     class JythonPrintJob(Object):
         def __init__(self, c):
             # type: (Component) -> None
-            super(ClientPrintUtilities.JythonPrintJob, self).__init__()
+            super(PrintUtilities.JythonPrintJob, self).__init__()
             print(c)
 
         def getBottomMargin(self):
@@ -286,7 +284,7 @@ class ClientPrintUtilities(Object):
 
     def __init__(self, app):
         # type: (Any) -> None
-        super(ClientPrintUtilities, self).__init__()
+        super(PrintUtilities, self).__init__()
         print(self, app)
 
     def createImage(self, c):
@@ -296,386 +294,12 @@ class ClientPrintUtilities(Object):
         return BufferedImage(width, height, imageType)
 
     def createPrintJob(self, c):
-        # type: (Component) -> ClientPrintUtilities.JythonPrintJob
+        # type: (Component) -> PrintUtilities.JythonPrintJob
         pass
 
     def printToImage(self, c, fileName=None):
         # type: (Component, Optional[str]) -> None
         pass
-
-
-class VisionUtilities(Object):
-    def __init__(self, *args):
-        # type: (*Any) -> None
-        super(VisionUtilities, self).__init__()
-        print(self, args)
-
-    def beep(self):
-        # type: () -> None
-        pass
-
-    def centerWindow(self, win):
-        # type: (PyObject) -> None
-        pass
-
-    def close(self):
-        # type: () -> None
-        pass
-
-    def closeDesktop(self, handle):
-        # type: (Union[str, unicode]) -> None
-        pass
-
-    def closeParentWindow(self, event):
-        # type: (EventObject) -> None
-        pass
-
-    def closeWindow(self, win):
-        # type: (PyObject) -> None
-        pass
-
-    def color(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Color
-        pass
-
-    def createImage(self, c):
-        # type: (Component) -> BufferedImage
-        pass
-
-    def createPopupMenu(self, keys, functions):
-        # type: (PySequence, PySequence) -> JPopupMenu
-        pass
-
-    def createPrintJob(self, c):
-        # type: (Component) -> ClientPrintUtilities.JythonPrintJob
-        pass
-
-    def desktop(self, arg=None):
-        # type: (Union[int, str, unicode, None]) -> VisionUtilities
-        pass
-
-    def exit(self):
-        # type: () -> None
-        pass
-
-    def exportCSV(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def exportExcel(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def exportHTML(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def findWindow(self, path):
-        # type: (Union[str, unicode]) -> List[PyComponentWrapper]
-        pass
-
-    def getAvailableLocales(self):
-        # type: () -> List[Union[str, unicode]]
-        pass
-
-    def getAvailableTerms(self):
-        # type: () -> List[Union[str, unicode]]
-        pass
-
-    def getClientId(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getConnectionMode(self):
-        # type: () -> int
-        pass
-
-    def getConnectTimeout(self):
-        # type: () -> int
-        pass
-
-    def getCurrentDesktop(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getCurrentWindow(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getDesktopHandles(self):
-        # type: () -> List[Any]
-        pass
-
-    def getEdition(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getExternalIpAddress(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getGatewayAddress(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getHandle(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getInactivitySeconds(self):
-        # type: () -> int
-        return 300
-
-    def getKeyboardLayouts(self):
-        # type: () -> List[KeyboardLayout]
-        pass
-
-    def getLocale(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getOpenedWindowNames(self):
-        # type: () -> PyTuple
-        pass
-
-    def getOpenedWindows(self):
-        # type: () -> PyTuple
-        pass
-
-    def getParentWindow(self, event):
-        # type: (EventObject) -> PyObject
-        pass
-
-    def getReadTimeout(self):
-        # type: () -> int
-        pass
-
-    def getRoles(self):
-        # type: () -> List[Union[str, unicode]]
-        pass
-
-    def getScreenIndex(self):
-        # type: () -> int
-        pass
-
-    def getScreens(self):
-        # type: () -> PySequence
-        pass
-
-    def getSibling(self, event, name):
-        # type: (EventObject, Union[str, unicode]) -> PyObject
-        pass
-
-    def getSystemFlags(self):
-        # type: () -> int
-        pass
-
-    def getUsername(self):
-        # type: () -> Union[str, unicode]
-        pass
-
-    def getUserRoles(self, *args, **kwargs):
-        # type: (*Any, **Any) -> List[Union[str, unicode]]
-        pass
-
-    def getWindow(self, name):
-        # type: (Union[str, unicode]) -> PyObject
-        pass
-
-    def getWindowNames(self):
-        # type: () -> PyTuple
-        pass
-
-    def goBack(self):
-        # type: () -> PyObject
-        pass
-
-    def goForward(self):
-        # type: () -> PyObject
-        pass
-
-    def goHome(self):
-        # type: () -> PyObject
-        pass
-
-    def invokeLater(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def isOverlaysEnabled(self):
-        # type: () -> bool
-        return True
-
-    def isScreenLocked(self):
-        # type: () -> bool
-        return True
-
-    def isTouchscreenMode(self):
-        # type: () -> bool
-        return True
-
-    def lockScreen(self, obscure=False):
-        # type: (bool) -> None
-        pass
-
-    def logout(self):
-        # type: () -> None
-        pass
-
-    def openDesktop(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> JFrame
-        pass
-
-    def openFile(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def openFiles(self, *args, **kwargs):
-        # type: (*Any, **Any) -> List[Union[str, unicode]]
-        pass
-
-    def openURL(self, url):
-        # type: (Union[str, unicode]) -> None
-        pass
-
-    def openWindow(
-        self,
-        path,  # type: Union[str, unicode]
-        params=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    ):
-        # type: (...) -> PyObject
-        pass
-
-    def openWindowInstance(
-        self,
-        path,  # type: Union[str, unicode]
-        params=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    ):
-        # type: (...) -> PyObject
-        pass
-
-    def playSoundClip(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def printToImage(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def refreshBinding(self, comp, propName):
-        # type: (JComponent, Union[str, unicode]) -> bool
-        return True
-
-    def retarget(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def saveFile(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def setConnectionMode(self, mode):
-        # type: (int) -> None
-        pass
-
-    def setConnectTimeout(self, timeout):
-        # type: (int) -> None
-        pass
-
-    def setLocale(self, locale):
-        # type: (Union[str, unicode, Locale]) -> None
-        pass
-
-    def setOverlaysEnabled(self, b):
-        # type: (bool) -> None
-        pass
-
-    def setReadTimeout(self, timeout):
-        # type: (int) -> None
-        pass
-
-    def setScreenIndex(self, index):
-        # type: (int) -> None
-        pass
-
-    def setTouchscreenMode(self, b):
-        # type: (bool) -> None
-        pass
-
-    def showColorInput(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Color
-        pass
-
-    def showConfirm(self, *args, **kwargs):
-        # type: (*Any, **Any) -> bool
-        print(args, kwargs)
-        return True
-
-    def showDiagnostics(self):
-        # type: () -> None
-        pass
-
-    def showError(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def showInput(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode, None]
-        pass
-
-    def showMessage(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def showNumericKeyPad(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Number
-        pass
-
-    def showPasswordInput(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode, None]
-        pass
-
-    def showTouchscreenKeyboard(self, *args, **kwargs):
-        # type: (*Any, **Any) -> Union[str, unicode]
-        pass
-
-    def showWarning(self, *args, **kwargs):
-        # type: (*Any, **Any) -> None
-        pass
-
-    def swapTo(
-        self,
-        name,  # type: Union[str, unicode]
-        params=None,  # type: Optional[Dict[Union[str, unicode], Any]]
-    ):
-        # type: (...) -> PyObject
-        pass
-
-    def swapWindow(self, *args):
-        # type: (*Any) -> PyObject
-        pass
-
-    def switchUser(self, *args, **kwargs):
-        # type: (*Any, **Any) -> bool
-        print(args, kwargs)
-        return True
-
-    def transform(self, *args, **kwargs):
-        # type: (*Any, **Union[str, unicode]) -> PyObject
-        pass
-
-    def unlockScreen(self):
-        # type: () -> None
-        pass
-
-    def updateProject(self):
-        # type: () -> None
-        pass
-
-    def validateUser(self, *args, **kwargs):
-        # type: (*Any, **Any) -> bool
-        print(args, kwargs)
-        return True
 
 
 class WindowUtilities(Object):

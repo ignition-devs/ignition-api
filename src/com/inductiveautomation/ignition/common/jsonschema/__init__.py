@@ -19,6 +19,8 @@ from java.util.regex import Pattern
 from com.inductiveautomation.ignition.common import JsonPath
 from com.inductiveautomation.ignition.common.gson import JsonArray, JsonElement
 
+VisibleWhenCondition = Tuple[Union[str, unicode], List[JsonElement]]
+
 
 class JsonValidator(object):
     AT_ROOT = None  # type: Union[str, unicode]
@@ -165,7 +167,7 @@ class JsonSchema(BaseJsonValidator):
         pass
 
     def getVisibleWhenCondition(self):
-        # type: () -> Optional[Tuple[Union[str, unicode], List[JsonElement]]]  # noqa: W505
+        # type: () -> Optional[VisibleWhenCondition]
         pass
 
     def hasChildren(self):

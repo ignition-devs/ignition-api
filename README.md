@@ -1,4 +1,4 @@
-# ignition-api 8.3
+# ignition-api 8.1
 
 <!--- Badges --->
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ignition-api)](https://pypi.org/project/ignition-api/)
@@ -8,7 +8,7 @@
 [![ci](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml/badge.svg)](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml)
 [![Join us on GitHub discussions](https://img.shields.io/badge/github-discussions-informational)](https://github.com/orgs/ignition-devs/discussions)
 
-`ignition-api` is a Python package that allows developers to get code completion
+ignition-api is a Python package that allows developers to get code completion
 for Ignition Scripting API scripting functions in their IDE of choice.
 
 ## Table of contents
@@ -112,7 +112,7 @@ Libraries for Java 32.0.1-jre API. For more information, see documentation here:
 
 This package includes supporting Inductive Automation's classes and interfaces.
 For more information, see documentation here:
-<https://files.inductiveautomation.com/sdk/javadoc/ignition83/8.3.2/index.html>.
+<https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.50/index.html>.
 
 #### org.apache
 
@@ -144,7 +144,7 @@ This package includes supporting classes and interfaces from Mongo Java driver
 
 This package includes supporting classes and interfaces from the Inductive
 Automation's `org.json` package, see documentation here:
-<https://files.inductiveautomation.com/sdk/javadoc/ignition83/8.3.2/org/json/package-summary.html>
+<https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.50/org/json/package-summary.html>
 
 #### org.python
 
@@ -162,7 +162,7 @@ For more information, see documentation here:
 
 This package includes all Ignition Scripting Functions. For more information,
 see documentation here:
-<https://docs.inductiveautomation.com/docs/8.3/appendix/scripting-functions>.
+<https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions>.
 
 ## Contributing
 
@@ -193,12 +193,12 @@ trademark of Inductive Automation. This package is community-maintained and
 provided as-is for development assistance purposes.
 
 <!-- Links -->
-[CONTRIBUTING.md]: https://github.com/ignition-devs/ignition-api/blob/main/CONTRIBUTING.md#contributing-to-ignition-api
+[CONTRIBUTING.md]: https://github.com/ignition-devs/ignition-api/blob/8.1/CONTRIBUTING.md#contributing-to-ignition-api
 [CONTRIBUTORS]: https://github.com/ignition-devs/ignition-api/graphs/contributors
 [Discussions]: https://github.com/orgs/ignition-devs/discussions
 [`ignition-api-stubs`]: https://pypi.org/project/ignition-api-stubs
-[Ignition System Functions]: https://docs.inductiveautomation.com/docs/8.3/appendix/scripting-functions
-[LICENSE]: https://github.com/ignition-devs/ignition-api/blob/main/LICENSE
+[Ignition System Functions]: https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions
+[LICENSE]: https://github.com/ignition-devs/ignition-api/blob/8.1/LICENSE
 [Microsoft Open Source Code of Conduct]: https://opensource.microsoft.com/codeofconduct/
 [`mypy`]: https://coatl-mypy.readthedocs.io/en/v0.971/
 [Python 2.7.18]: https://www.python.org/downloads/release/python-2718/

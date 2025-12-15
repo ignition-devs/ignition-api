@@ -7,7 +7,6 @@ ability to run reports.
 from __future__ import print_function
 
 __all__ = [
-    "QueryResults",
     "executeAndDistribute",
     "executeReport",
     "getReportNamesAsDataset",
@@ -19,7 +18,6 @@ from typing import Any, Dict, List, Optional, Union
 from java.lang import IllegalArgumentException
 
 from com.inductiveautomation.ignition.common import BasicDataset
-from com.inductiveautomation.reporting.common.api import QueryResults
 
 
 def executeAndDistribute(

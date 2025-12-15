@@ -11,7 +11,7 @@ __all__ = [
     "TypeUtilities",
 ]
 
-from typing import Any, Iterable, Iterator, List, Optional, Set, Union
+from typing import Any, Iterable, List, Optional, Set, Union
 
 from java.awt import Color
 from java.lang import (
@@ -230,10 +230,6 @@ class Dataset(object):
             Whether this dataset has any quality data to report.
         """
         return True
-
-    def __iter__(self):
-        # type: () -> Iterator[Any]
-        pass
 
 
 class AbstractDataset(Dataset):

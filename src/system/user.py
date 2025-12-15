@@ -351,11 +351,8 @@ def getScheduleNames():
     return ["A", "Always", "B", "C", "Example", "MyComposite", "MySchedule"]
 
 
-def getScheduledUsers(
-    userSource,  # type: Union[str, unicode]
-    date=None,  # type: Optional[Union[Date, int]]
-):
-    # type: (...) -> List[PyUser]
+def getScheduledUsers(userSource, date=Date()):
+    # type: (Union[str, unicode], Union[Date, int]) -> List[PyUser]
     """Returns a list of users that are scheduled on.
 
     If no users are scheduled, it will return an empty list.
@@ -371,8 +368,6 @@ def getScheduledUsers(
         List of all Users scheduled for the given date, taking schedule
         adjustments into account.
     """
-    if date is None:
-        date = Date()
     print(userSource, date)
     return [PyUser()]
 

@@ -15,6 +15,9 @@ __all__ = [
     "dataSetToHTML",
     "deleteRow",
     "deleteRows",
+    "exportCSV",
+    "exportExcel",
+    "exportHTML",
     "filterColumns",
     "formatDates",
     "fromCSV",
@@ -24,14 +27,19 @@ __all__ = [
     "toCSV",
     "toDataSet",
     "toExcel",
+    "toPyDataSet",
     "updateRow",
 ]
 
+import os.path
 from typing import Any, Dict, List, Optional, Type, Union
 
 from java.util import Date, Locale
 
 from com.inductiveautomation.ignition.common import Dataset
+from com.inductiveautomation.ignition.common.script.builtin import DatasetUtilities
+
+ColType = Union[float, long, int, str, unicode, Date]
 
 
 def addColumn(
@@ -39,7 +47,7 @@ def addColumn(
     colIndex,  # type: int
     col,  # type: List[Any]
     colName,  # type: Union[str, unicode]
-    colType,  # type: Type[Union[Union[float, int, long], Union[str, unicode], Date]]
+    colType,  # type: Type[ColType]
 ):
     # type: (...) -> Dataset
     """Takes a dataset and returns a new dataset with a new column added
@@ -269,6 +277,88 @@ def deleteRows(dataset, rowIndices):
     return Dataset()
 
 
+def exportCSV(filename, showHeaders, dataset):
+    # type: (Union[str, unicode], bool, Dataset) -> Union[str, unicode]
+    """Exports the contents of a dataset as a CSV file, prompting the
+    user to save the file to disk.
+
+    To write silently to a file, you cannot use the `dataset.export*`
+    functions. Instead, use the `toCSV()` function.
+
+    Args:
+        filename: A suggested filename to save as.
+        showHeaders: If True, the CSV file will include a header
+            row.
+        dataset: The dataset to export.
+
+    Returns:
+        The path to the saved file, or None if the action was canceled
+        by the user.
+    """
+    print(filename, showHeaders, dataset)
+    return os.path.expanduser("~")
+
+
+def exportExcel(
+    filename,  # type: Union[str, unicode]
+    showHeaders,  # type: bool
+    dataset,  # type: Union[Dataset, List[Dataset]]
+    nullsEmpty=False,  # type: bool
+):
+    # type: (...) -> Union[str, unicode]
+    """Exports the contents of a dataset as an Excel spreadsheet,
+    prompting the user to save the file to disk.
+
+    Uses the same format as the dataSetToExcel function.
+
+    To write silently to a file, you cannot use the `dataset.export*`
+    functions. Instead, use the `toExcel()` function.
+
+    Args:
+        filename: A suggested filename to save as.
+        showHeaders: If True, the spreadsheet will include a header
+            row.
+        dataset: Either a single dataset, or a list of datasets. When
+            passing a list, each element represents a single sheet in
+            the resulting workbook.
+        nullsEmpty: If True, the spreadsheet will leave cells with NULL
+            values empty, instead of allowing Excel to provide a default
+            value like 0. Defaults to False. Optional.
+
+    Returns:
+        The path to the saved file, or None if the action was canceled
+        by the user.
+    """
+    print(filename, showHeaders, dataset, nullsEmpty)
+    return os.path.expanduser("~")
+
+
+def exportHTML(
+    filename,  # type: Union[str, unicode]
+    showHeaders,  # type: bool
+    dataset,  # type: Dataset
+    title,  # type: Union[str, unicode]
+):
+    # type: (...) -> Union[str, unicode]
+    """Exports the contents of a dataset to an HTML page.
+
+    Prompts the user to save the file to disk.
+
+    Args:
+        filename: A suggested filename to save as.
+        showHeaders: If True, the HTML table will include a header
+            row.
+        dataset: The dataset to export.
+        title: The title for the HTML page.
+
+    Returns:
+        The path to the saved file, or None if the action was canceled
+        by the user.
+    """
+    print(filename, showHeaders, dataset, title)
+    return os.path.expanduser("~")
+
+
 def filterColumns(
     dataset,  # type: Dataset
     columns,  # type: Union[List[Union[str, unicode]], List[int]]
@@ -356,13 +446,8 @@ def getColumnHeaders(dataset):
     return ["column1", "column2"]
 
 
-def setValue(
-    dataset,  # type: Dataset
-    rowIndex,  # type: int
-    columnNameOrIndex,  # type: Union[str, unicode, int]
-    value,  # type: Any
-):
-    # type: (...) -> Dataset
+def setValue(dataset, rowIndex, columnNameOrIndex, value):
+    # type: (Dataset, int, Union[str, unicode, int], Any) -> Dataset
     """Takes a dataset and returns a new dataset with a one value
     altered.
 
@@ -512,6 +597,22 @@ def toExcel(
         A byte array representing an Excel workbook.
     """
     print(showHeaders, dataset, nullsEmpty, sheetNames)
+
+
+def toPyDataSet(dataset):
+    # type: (Dataset) -> DatasetUtilities.PyDataSet
+    """This function converts from a normal DataSet to a PyDataSet,
+    which is a wrapper class which makes working with datasets more
+    Python-esque.
+
+    Args:
+        dataset: A Dataset object to convert into a PyDataSet.
+
+    Returns:
+        The newly created PyDataSet.
+    """
+    print(dataset)
+    return DatasetUtilities.PyDataSet()
 
 
 def updateRow(dataset, rowIndex, changes):

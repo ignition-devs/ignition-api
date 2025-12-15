@@ -912,12 +912,12 @@ class PyDescriptor(PyObject, PyBuiltinCallable.Info):
 class PyException(RuntimeException):
     traceback = None  # type: Optional[PyTraceback]
     type = None  # type: Optional[PyObject]
-    value = None  # type: Union[str, unicode, None, PyObject]
+    value = None  # type: Optional[Union[PyObject, str, unicode]]
 
     def __init__(
         self,
         type_=None,  # type: Optional[PyObject]
-        value=None,  # type: Union[str, unicode, None, PyObject]
+        value=None,  # type: Optional[Union[PyObject, str, unicode]]
         traceback=None,  # type: Optional[PyTraceback]
     ):
         # type: (...) -> None

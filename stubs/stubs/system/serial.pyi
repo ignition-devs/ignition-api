@@ -21,22 +21,16 @@ DATA_BITS_5: int
 DATA_BITS_6: int
 DATA_BITS_7: int
 DATA_BITS_8: int
-DEFAULT_BIT_RATE: int
-DEFAULT_DATA_BITS: int
-DEFAULT_FLOW_CONTROL: int
-DEFAULT_HANDSHAKE: int
-DEFAULT_HARDWARE_FLOW_CONTROL: bool
-DEFAULT_PARITY: int
-DEFAULT_READ_TIMEOUT_MS: int
-DEFAULT_STOP_BITS: int
-DEFAULT_WRITE_TIMEOUT_MS: int
-FLOW_CONTROL_CTS_ENABLED: int
-FLOW_CONTROL_DISABLED: int
-FLOW_CONTROL_DSR_ENABLED: int
-FLOW_CONTROL_DTR_ENABLED: int
-FLOW_CONTROL_RTS_ENABLED: int
-FLOW_CONTROL_XONXOFF_IN_ENABLED: int
-FLOW_CONTROL_XONXOFF_OUT_ENABLED: int
+HANDSHAKE_CTS_DTR: int
+HANDSHAKE_CTS_RTS: int
+HANDSHAKE_DSR_DTR: int
+HANDSHAKE_HARD_IN: int
+HANDSHAKE_HARD_OUT: int
+HANDSHAKE_NONE: int
+HANDSHAKE_SOFT_IN: int
+HANDSHAKE_SOFT_OUT: int
+HANDSHAKE_SPLIT_MASK: int
+HANDSHAKE_XON_XOFF: int
 PARITY_EVEN: int
 PARITY_ODD: int
 PARITY_MARK: int
@@ -91,7 +85,7 @@ def write(
     port: Union[str, unicode],
     toWrite: Union[str, unicode],
     timeout: int = ...,
-    encoding: Union[str, unicode, None] = ...,
+    encoding: Union[str, unicode] = ...,
 ) -> None: ...
 def writeBytes(
     port: Union[str, unicode], toWrite: Any, timeout: Optional[int] = ...

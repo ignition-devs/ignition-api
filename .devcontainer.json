@@ -1,5 +1,5 @@
 {
-  "name": "ignition-api@8.3",
+  "name": "ignition-api@8.1",
   "image": "quay.io/ignition-devs/devcontainer-base:python",
   "customizations": {
     "vscode": {

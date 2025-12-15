@@ -10,30 +10,45 @@ __all__ = [
     "LEGACY_DEFAULT_TIMEOUT_MILLIS",
     "TAG_PATH",
     "browse",
+    "browseHistoricalTags",
     "configure",
     "copy",
+    "deleteAnnotations",
     "deleteTags",
     "exists",
     "exportTags",
     "getConfiguration",
     "importTags",
+    "isOverlaysEnabled",
     "move",
     "query",
+    "queryAnnotations",
+    "queryTagCalculations",
+    "queryTagDensity",
+    "queryTagHistory",
     "readAsync",
     "readBlocking",
     "rename",
     "requestGroupExecution",
-    "restartProvider",
+    "setOverlaysEnabled",
+    "storeAnnotations",
+    "storeTagHistory",
     "writeAsync",
     "writeBlocking",
 ]
 
 from typing import Any, Callable, Dict, List, Optional, Union
 
+from java.util import Date
+
+from com.inductiveautomation.ignition.common import BasicDataset
 from com.inductiveautomation.ignition.common.browsing import Results
 from com.inductiveautomation.ignition.common.model.values import (
     BasicQualifiedValue,
     QualityCode,
+)
+from com.inductiveautomation.ignition.common.sqltags.history.annotations import (
+    Annotation,
 )
 
 DEFAULT_TIMEOUT_MILLIS = 45000
@@ -61,6 +76,37 @@ def browse(
         for each Tag found during the browse.
     """
     print(path, filter)
+    return Results()
+
+
+def browseHistoricalTags(
+    path,  # type: Union[str, unicode]
+    nameFilters=None,  # type: Optional[List[Union[str, unicode]]]
+    maxSize=None,  # type: Optional[int]
+    continuationPoint=None,  # type: Optional[Any]
+):
+    # type: (...) -> Results
+    """Will browse for any historical Tags at the provided historical
+    path.
+
+    It will only browse for Tags at the path, and will not go down
+    through any children. Will return with a BrowseResults object.
+
+    Args:
+        path: The Historical Tag Path to browse.
+        nameFilters: A list of name filters to be applied to the result
+            set. Optional.
+        maxSize: The maximum size of the result set. Optional.
+        continuationPoint: Sets the continuation point in order to
+            continue a browse that was previously started and then
+            limited. Use getContinuationPoint() on the Results object to
+            get the continuation point. Optional.
+
+    Returns:
+        A Results object which contains a list of Tag dictionaries, one
+        for each Tag found during the browse.
+    """
+    print(path, nameFilters, maxSize, continuationPoint)
     return Results()
 
 
@@ -141,6 +187,39 @@ def copy(
     """
     print(tags, destination, collisionPolicy)
     return [QualityCode() for _ in tags]
+
+
+def deleteAnnotations(
+    paths,  # type: List[Union[str, unicode]]
+    storageIds,  # type: List[Union[str, unicode]]
+):
+    # type: (...) -> List[BasicQualifiedValue]
+    """Removes stored annotations from the sqlth_annotations table.
+
+    Requires the full Tag path (including history provider) for each
+    annotation, as well as each annotation's storage ID.
+
+    The function expects two lists (PySequences) of equal length. The
+    items in each list is 1-to-1, meaning the first item in the "paths"
+    list relates to the first item in the "storageIds" list, the second
+    item in "paths" relates to the second item in "storageIds", etc.
+
+    Args:
+        paths: A list of Tag paths with existing annotations. The paths
+            are equivalent to what would be used for a Tag history
+            query, and should specify the source provider as well. For
+            example, "[HistoryProvider/Gateway:Provider]Path/To/Tag".
+        storageIds: A sequence of storage identifiers that will be
+            deleted. Storage ID values can be retrieved with
+            system.tag.queryAnnotations.
+
+    Returns:
+        A list of qualified values. The quality code will indicate
+        success or failure, and if successful, the storage id of the
+        annotation will have been deleted.
+    """
+    print(paths, storageIds)
+    return [BasicQualifiedValue() for _ in paths]
 
 
 def deleteTags(tagPaths):
@@ -279,6 +358,17 @@ def importTags(
     return [QualityCode()]
 
 
+def isOverlaysEnabled():
+    # type: () -> bool
+    """Returns whether or not the current client's quality overlay
+    system is currently enabled.
+
+    Returns:
+         True if overlays are currently enabled.
+    """
+    return False
+
+
 def move(
     tags,  # type: List[Union[str, unicode]]
     destination,  # type: Union[str, unicode]
@@ -335,6 +425,285 @@ def query(
     """
     print(provider, query, limit, continuation)
     return Results()
+
+
+def queryAnnotations(
+    paths,  # type: List[Union[str, unicode]]
+    startTime=None,  # type: Optional[Date]
+    endTime=None,  # type: Optional[Date]
+    types=None,  # type: Optional[List[Union[str, unicode]]]
+):
+    # type: (...) -> List[Annotation]
+    """Queries user stored annotations from the Tag history system for a
+    set of paths, for a given time range.
+
+    Args:
+        paths: A list of Tag paths to query. The paths are equivalent to
+            what would be used ofr a Tag history query, and should
+            specify the source provider as well. For example,
+            ``"[HistoryProvider/Gateway:Provider]Path/To/Tag"``.
+        startTime: The start of the time range. If not defined, defaults
+            to 12 hours ago. Optional.
+        endTime: The end of time range. If not defined, defaults to
+            "now". Optional.
+        types: A list of string "types" to filter on. Types are defined
+            by the annotations and various subsystems, and may vary with
+            different providers. Possible annotation types are listed on
+            the system.Tag.storeAnnotations page. Optional.
+
+    Returns:
+        A list of Annotation objects that match the query criteria.
+    """
+    print(paths, startTime, endTime, types)
+    return [Annotation() for _ in paths]
+
+
+def queryTagCalculations(
+    paths,  # type: List[Union[str, unicode]]
+    calculations,  # type: List[Union[str, unicode]]
+    startDate=None,  # type: Optional[Date]
+    endDate=None,  # type: Optional[Date]
+    rangeHours=None,  # type: Optional[int]
+    rangeMinutes=None,  # type: Optional[int]
+    aliases=None,  # type: Optional[List[Union[str, unicode]]]
+    includeBoundingValues=True,  # type: bool
+    validatesSCExec=True,  # type: bool
+    noInterpolation=False,  # type: bool
+    ignoreBadQuality=False,  # type: bool
+):
+    # type: (...) -> BasicDataset
+    """Queries various calculations (aggregations) for a set of tags
+    over a specified range.
+
+    Returns a dataset with a row per Tag, and a column per calculation.
+
+    This is useful when you wish to aggregate Tag history collected over
+    a period of time into a single value per aggregate. If you want
+    multiple values aggregated to a single time slice (i.e., hourly
+    aggregates for the same Tag over an 8 hour period) consider using
+    system.Tag.queryTagHistory
+
+    Args:
+        paths: An array of Tag paths (strings) to query calculations
+            for. The resulting dataset will have a row for each Tag, and
+            a column for each calculation.
+        calculations: An array of calculations (aggregation functions)
+            to execute for each Tag. Valid values are: "Average"
+            (time-weighted), "MinMax", "LastValue", "SimpleAverage",
+            "Sum", "Minimum", "Maximum", "DurationOn", "DurationOff",
+            "CountOn", "CountOff", "Count", "Range", "Variance",
+            "StdDev", "PctGood", and "PctBad".
+        startDate: The starting point for the calculation window. If
+            omitted, and range is not used, 8 hours before the current
+            time is used. Optional.
+        endDate: The end of the calculation window. If omitted, and
+            range is not used, uses the current time. Optional.
+        rangeHours: Allows you to specify the query range in hours,
+            instead of using start and end date. Can be positive or
+            negative, and can be used in conjunction with startDate or
+            endDate. Optional.
+        rangeMinutes: Same as rangeHours, but in minutes. Optional.
+        aliases: Aliases that will be used to override the Tag path
+            names in the result dataset. Must be 1-to-1 with the Tag
+            paths. If not specified, the Tag paths themselves will be
+            used. Optional.
+        includeBoundingValues: A boolean flag indicating that the system
+            should attempt to load values before and after the query
+            bounds for the purpose of interpolation. The effect depends
+            on the aggregates used. The default is True. Optional.
+        validatesSCExec: A boolean flag indicating whether or not data
+            should be validated against the scan class execution
+            records. If False, calculations may include data that is
+            assumed to be good, even though the system may not have been
+            running. Default is True. Optional.
+        noInterpolation: A boolean flag indicating that the system
+            should not attempt to interpolate values in situations where
+            it normally would, such as for analog tags. Default is
+            False. Optional.
+        ignoreBadQuality: A boolean flag indicating that bad quality
+            values should not be used in the query process. If set, any
+            value with a "bad" quality will be completely ignored in
+            calculations. Default is False. Optional.
+
+    Returns:
+        A dataset representing the calculations over the specified
+        range.
+    """
+    print(
+        paths,
+        calculations,
+        startDate,
+        endDate,
+        rangeHours,
+        rangeMinutes,
+        aliases,
+        includeBoundingValues,
+        validatesSCExec,
+        noInterpolation,
+        ignoreBadQuality,
+    )
+    return BasicDataset()
+
+
+def queryTagDensity(paths, startDate, endDate):
+    # type: (List[Union[str, unicode]], Date, Date) -> BasicDataset
+    """Queries the Tag history system for information about the density
+    of data.
+
+    In other words, how much data is available for a given time
+    span.
+
+    This function is called with a list of Tag paths, and a start and
+    end date. The result set is a two column dataset specifying the
+    timestamp, and a relative weight. Each row is valid from the given
+    time until the next row. Tags are assigned a 1 or a 0 if they are
+    present or not. All values are then multiplied together to get a
+    decimal based percentage for the density. Thus, for four Tag paths
+    passed in, if three Tags were present during the span, the result
+    would be 0.75.
+
+    Note:
+        This function relies on being able to validate the data against
+        tag group execution. This function will be unable to return
+        density information for tags that were stored by an Internal
+        Historian Provider, as well as cases where tag group validation
+        is disabled (such as by disabling Enable State Data Detection).
+
+    Args:
+        paths: An array of Tag paths (strings) to query.
+        startDate: The start of the range to query.
+        endDate: The end of the range to query.
+
+    Returns:
+        A two-column dataset consisting of a timestamp and a weight.
+        Each row is valid until the next row.
+    """
+    print(paths, startDate, endDate)
+    return BasicDataset()
+
+
+def queryTagHistory(
+    paths,  # type: List[Union[str, unicode]]
+    startDate=None,  # type: Optional[Date]
+    endDate=None,  # type: Optional[Date]
+    returnSize=-1,  # type: int
+    aggregationMode="Average",  # type: Union[str, unicode]
+    returnFormat="Wide",  # type: Union[str, unicode]
+    columnNames=None,  # type: Optional[List[Union[str, unicode]]]
+    intervalHours=None,  # type: Optional[int]
+    intervalMinutes=None,  # type: Optional[int]
+    rangeHours=None,  # type: Optional[int]
+    rangeMinutes=None,  # type: Optional[int]
+    aggregationModes=None,  # type: Optional[List[Union[str, unicode]]]
+    includeBoundingValues=None,  # type: Optional[bool]
+    validateSCExec=None,  # type: Optional[bool]
+    noInterpolation=None,  # type: Optional[bool]
+    ignoreBadQuality=None,  # type: Optional[bool]
+    timeout=None,  # type: Optional[int]
+    intervalSeconds=None,  # type: Optional[int]
+    rangeSeconds=None,  # type: Optional[int]
+):
+    # type: (...) -> BasicDataset
+    """Issues a query to the Tag Historian.
+
+    Querying Tag history involves specifying the tags and the date
+    range, as well as a few optional parameters. The Tag historian will
+    find the relevant history and then interpolate and aggregate it
+    together into a coherent, tabular result set.
+
+    Args:
+        paths: An array of Tag paths (strings) to query. Each Tag path
+            specified will be a column in the result dataset.
+        startDate: The earliest value to retrieve. If omitted, 8 hours
+            before current time is used. Optional.
+        endDate: The latest value to retrieve. If omitted, current time
+            is used. Optional.
+        returnSize: The number of samples to return. -1 will return
+            values as they changed, and 0 will return the "natural"
+            number of values based on the logging rates of the scan
+            class(es) involved. -1 is the default. Optional.
+        aggregationMode: The mode to use when aggregating multiple
+            samples into one time slice. Valid values are: "Average"
+            (time-weighted), "MinMax", "LastValue", "SimpleAverage",
+            "Sum", "Minimum", "Maximum", "DurationOn", "DurationOff",
+            "CountOn", "CountOff", "Count", "Range", "Variance",
+            "StdDev", "PctGood", and "PctBad". Optional.
+        returnFormat: Use "Wide" to have a column per Tag queried, or
+            "Tall" to have a fixed-column format. Default is "Wide".
+            Optional.
+        columnNames: Aliases that will be used to override the column
+            names in the result dataset. Must be 1-to-1 with the Tag
+            paths. If not specified, the Tag paths themselves will be
+            used as column titles. Optional.
+        intervalHours: Allows you to specify the window interval in
+            terms of hours, as opposed to using a specific return size.
+            Optional.
+        intervalMinutes: Same as intervalHours, but in minutes. Can be
+            used on its own, or in conjunction with intervalHours.
+            Optional.
+        rangeHours: Allows you to specify the query range in hours,
+            instead of using start and end date. Can be positive or
+            negative, and can be used in conjunction with startDate or
+            endDate. Optional.
+        rangeMinutes: Same as rangeHours, but in minutes. Optional.
+        aggregationModes: A one-to-one list with paths specifying an
+            aggregation mode per column. Optional.
+        includeBoundingValues: A boolean flag indicating that the system
+            should attempt to include values for the query bound times
+            if possible. The default for this property depends on the
+            query mode, so unless a specific behavior is desired, it is
+            best to not include this parameter. Optional.
+        validateSCExec: A boolean flag indicating whether or not data
+            should be validated against the scan class execution
+            records. If False, data will appear flat (but good quality)
+            for periods of time in which the system wasn't running. If
+            True, the same data would be bad quality during downtime
+            periods. Optional.
+        noInterpolation: A boolean flag indicating that the system
+            should not attempt to interpolate values in situations where
+            it normally would. This will also prevent the return of rows
+            that are purely interpolated. Optional.
+        ignoreBadQuality: A boolean flag indicating that bad quality
+            values should not be used in the query process. If set, any
+            value with a "bad" quality will be completely ignored in
+            calculations and in the result set. Optional.
+        timeout: Timeout in milliseconds for Client Scope. This property
+            is ignored in the Gateway Scope. Optional.
+        intervalSeconds: Same as intervalHours and interval Minutes, but
+            in seconds. Can be used on its own, or in conjunction with
+            intervalHours and intervalMinutes. Optional.
+        rangeSeconds: Allows you to specify the query range in seconds,
+            instead of using start and end date. Can be positive or
+            negative, and can be used in conjunction with startDate or
+            endDate. Optional.
+
+    Returns:
+        A dataset representing the historian values for the specified
+        Tag paths. The first column will be the timestamp, and each
+        column after that represents a Tag.
+    """
+    print(
+        paths,
+        startDate,
+        endDate,
+        returnSize,
+        aggregationMode,
+        returnFormat,
+        columnNames,
+        intervalHours,
+        intervalMinutes,
+        rangeHours,
+        rangeMinutes,
+        aggregationModes,
+        includeBoundingValues,
+        validateSCExec,
+        noInterpolation,
+        ignoreBadQuality,
+        timeout,
+        intervalSeconds,
+        rangeSeconds,
+    )
+    return BasicDataset()
 
 
 def readAsync(tagPaths, callback):
@@ -415,19 +784,124 @@ def requestGroupExecution(provider, tagGroup):
     print(provider, tagGroup)
 
 
-def restartProvider(provider):
-    # type: (Union[str, unicode]) -> bool
-    """Stops and restarts the specified provider.
+def setOverlaysEnabled(enabled):
+    # type: (bool) -> None
+    """Enables or disables the component quality overlay system.
 
     Args:
-        provider: The name of the Tag Provider to restart.
+        enabled: True to turn on Tag overlays, False to turn
+            them off.
+    """
+    print(enabled)
+
+
+def storeAnnotations(
+    paths,  # type: List[Union[str, unicode]]
+    startTimes=None,  # type: Optional[List[Date]]
+    endTimes=None,  # type: Optional[List[Date]]
+    types=None,  # type: Optional[List[Annotation]]
+    data=None,  # type: Optional[List[Union[str, unicode]]]
+    storageIds=None,  # type: Optional[List[int]]
+    deleted=None,  # type: Optional[List[bool]]
+):
+    # type: (...) -> List[BasicQualifiedValue]
+    """Stores annotations into the Tag history system.
+
+    Annotations are stored by the underlying historian implementations,
+    so different providers may store in different ways, and some
+    providers may not support annotation storage. All parameters are
+    1-to-1, so all provided lists should be of the same length. If a
+    particular annotation doesn't need a parameter, that element can be
+    None in the list.
+
+    Args:
+        paths: A list of Tag paths to store for. The paths are
+            equivalent to what would be used for a Tag history query,
+            and should specify the source provider as well. For example,
+            ``"[HistoryProvider/Gateway:Provider]Path/To/Tag"``. This
+            parameter is required, even if storage ids are included,
+            because it is used to identify the underlying storage
+            provider.
+        startTimes: The start times of the events. If omitted, defaults
+            to the current time. Optional.
+        endTimes: The end times of the event, if applicable. If omitted,
+            does not store an end time for the annotation. Optional.
+        types: The type id for the annotation. If not defined, "marker"
+            will be used. See the Annotation Types for more details.
+            Optional.
+        data: Data for the annotation, such as text describing the
+            meaning of the annotation. Optional.
+        storageIds: If defined, the function will instead update the
+            existing annotation instead of adding new ones, overriding
+            existing values for the annotation with those provided by
+            this function (if the corresponding delete parameter is
+            True). Storage id is available on the Annotation object, and
+            is returned as the result value from the storeAnnotations
+            call. Optional.
+        deleted: A list of booleans indicating that the individual
+            annotation should be deleted. Requires storage id to be set
+            as well. Optional.
 
     Returns:
-        True if the provider was successfully restarted, False
-        otherwise.
+        A list of QualifiedValues. The quality code will indicate
+        success or failure. If successful,  the storage id of the
+        annotation will be returned in the value.
     """
-    print(provider)
-    return True
+    print(paths, startTimes, endTimes, types, data, storageIds, deleted)
+    return [BasicQualifiedValue() for _ in paths]
+
+
+def storeTagHistory(
+    historyprovider,  # type: Union[str, unicode]
+    tagprovider,  # type: Union[str, unicode]
+    paths,  # type: List[Union[str, unicode]]
+    values,  # type: List[Any]
+    qualities=None,  # type: Optional[List[int]]
+    timestamps=None,  # type: Optional[List[Date]]
+):
+    # type: (...) -> None
+    """Inserts data into the Tag history system, allowing Tag history to
+    be recorded via scripting.
+
+    The Tag paths are associated with a historical and realtime
+    provider, but they do not necessarily need to exist in the realtime
+    provider. This means records from non-existent (virtual) Tags can be
+    stored in the Tag History system. Because of this, it is imperative
+    that Tag paths passed to the function are typed precisely, otherwise
+    the history will be stored at an incorrect path.
+
+    Note that the Tag History system does cache Tag data. Thus, if this
+    function is called, the Tag path and Tag id are cached until the
+    history provider or gateway are restarted. This means manually
+    removing the Tag from the sqlth_te table, and then calling this
+    function again with the same path will not re-populate the Tag
+    execution table (especially so when working purely with virtual Tag
+    paths). Instead, the cache must first be cleared, and then a new
+    entry will be added the next time this function is called.
+
+    If a Tag's datatype changes after recording Tag history, this
+    function will create a new entry in the sqlth_te table to reflect
+    the change.
+
+    Args:
+        historyprovider: The historical provider to store to.
+        tagprovider: The name of the realtime Tag provider to associate
+            these tags with. The Tag provider does not need to exist,
+            and the Tag paths do not need to exist in it.
+        paths: A list of paths to store. The values, qualities, and
+            timestamps are one-to-one with the paths. A single path may
+            be present multiple times in order to store multiple values.
+        values: A list of values to store.
+        qualities: A list of integer quality codes corresponding to the
+            values. Quality codes can be found on the Tag Quality and
+            Overlays page. If omitted, GOOD quality will be used.
+            Optional.
+        timestamps: A list of Date timestamps corresponding to the
+            values. If omitted, the current time will be used. A
+            java.util.date object may be passed, so the system.date
+            functions can be used to return a timestamp. Optional.
+    """
+    print(historyprovider, tagprovider, paths, values, qualities, timestamps)
 
 
 def writeAsync(
