@@ -1,0 +1,87 @@
+ci:
+  autoupdate_commit_msg: 'build(deps): pre-commit autoupdate'
+  autofix_commit_msg: 'style: apply auto fixes with pre-commit'
+  skip:
+    - pylint
+
+repos:
+  - repo: https://github.com/aio-libs/sort-all
+    rev: v1.3.0
+    hooks:
+      - id: sort-all
+        files: ^src/
+  - repo: https://github.com/bwhmather/ssort
+    rev: 0.16.0
+    hooks:
+      - id: ssort
+        files: ^src/
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 25.12.0
+    hooks:
+      - id: black
+  - repo: https://github.com/hakancelikdev/unimport
+    rev: 1.3.0
+    hooks:
+      - id: unimport
+        files: ^src/
+        language_version: python3.12
+  - repo: https://github.com/PyCQA/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        name: isort-package
+        files: ^src/
+        args: [--settings-file, tox.ini]
+  - repo: https://github.com/PyCQA/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        name: isort-stubs
+        files: ^stubs/stubs/
+        args: [--settings-file, stubs/tox.ini]
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.7.7
+    hooks:
+      - id: docformatter
+        files: ^src/
+        args: [--config, tox.ini]
+        language_version: python3.12
+  - repo: https://github.com/coatl-dev/flake8
+    rev: 5.0.4
+    hooks:
+      - id: flake8
+        name: flake8-package
+        files: ^src/
+        args: [--config, tox.ini]
+        additional_dependencies: [pydoclint]
+        language_version: python3.12
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        name: flake8-stubs
+        types: [file]
+        files: \.(pyi)$
+        additional_dependencies: [flake8-pyi]
+        args: [--config, stubs/tox.ini]
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        files: ^src/
+        exclude: ^src/(ch|com|org)/
+        args: [--config, tox.ini]
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.10.0
+    hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages: [pre-push]
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        files: ^src/
+        types: [python]

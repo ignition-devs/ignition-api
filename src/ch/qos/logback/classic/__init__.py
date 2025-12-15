@@ -1,0 +1,46 @@
+__all__ = ["Level"]
+
+from typing import Any, Union
+
+from java.lang import Object
+
+import org.slf4j.event
+
+
+class Level(Object):
+    @staticmethod
+    def convertAnSLF4JLevel(slf4jLevel):
+        # type: (org.slf4j.event.Level) -> Level
+        pass
+
+    @staticmethod
+    def fromLocationAwareLoggerInteger(levelInt):
+        # type: (int) -> Level
+        pass
+
+    def isGreaterOrEqual(self, r):
+        # type: (Level) -> bool
+        return True
+
+    def toInt(self):
+        # type: () -> int
+        pass
+
+    def toInteger(self):
+        # type: () -> int
+        pass
+
+    @staticmethod
+    def toLevel(*args):
+        # type: (*Any) -> Level
+        pass
+
+    @staticmethod
+    def toLocationAwareLoggerInteger(level):
+        # type: (Level) -> int
+        pass
+
+    @staticmethod
+    def valueOf(sArg):
+        # type: (Union[str, unicode]) -> Level
+        pass

@@ -1,0 +1,19 @@
+{
+  "name": "ignition-api@8.3",
+  "image": "quay.io/ignition-devs/devcontainer-base:python",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/python/2.7/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": {
+    "pre-commit-hooks": "pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push",
+    "dev-requirements": "python2 -m pip install --requirement requirements.txt"
+  }
+}

@@ -1,0 +1,21 @@
+name: pre-commit-autoupdate
+
+on:
+  schedule:
+    - cron: '0 20 1 * *'
+  workflow_dispatch:
+
+jobs:
+  pre-commit-autoupdate:
+    strategy:
+      matrix:
+        branch: ['8.1', '8.3']
+      fail-fast: false
+    uses: coatl-dev/workflows/.github/workflows/pre-commit-autoupdate.yml@v6
+    with:
+      checkout-ref: ${{ matrix.branch }}
+      pr-create-additional-args: '--base ${{ matrix.branch }}'
+    secrets:
+      gh-token: ${{ secrets.COATL_BOT_GH_TOKEN }}
+      gpg-sign-passphrase: ${{ secrets.COATL_BOT_GPG_PASSPHRASE }}
+      gpg-sign-private-key: ${{ secrets.COATL_BOT_GPG_PASSPHRASE }}

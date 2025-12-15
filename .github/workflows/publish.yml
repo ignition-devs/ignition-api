@@ -1,0 +1,26 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  pypi-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Upload package to PyPI
+        uses: coatl-dev/actions/pypi-upload@v5
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_PKG }}
+
+      - name: Upload stubs to PyPI
+        uses: coatl-dev/actions/pypi-upload@v5
+        with:
+          python-version: '3.12'
+          password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_STUBS }}
+          working-directory: stubs

@@ -1,0 +1,4 @@
+[pip]
+no-strip-extras = true
+output-file = "requirements.txt"
+python = "3.12"

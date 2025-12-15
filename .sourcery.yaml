@@ -1,0 +1,35 @@
+version: "1"
+
+ignore:
+  - .git
+  - venv
+  - .venv
+  - env
+  - .env
+  - .tox
+
+rule_settings:
+  enable:
+    - default
+  disable:
+    - avoid-builtin-shadow
+  rule_types:
+    - refactoring
+    - suggestion
+    - comment
+  python_version: "3.3"
+
+metrics:
+  quality_threshold: 25.0
+
+github:
+  labels: []
+  ignore_labels:
+    - sourcery-ignore
+  request_review: author
+  sourcery_branch: sourcery/{base_branch}
+
+clone_detection:
+  min_lines: 3
+  min_duplicates: 2
+  identical_clones_only: false

@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches: ['8.1', '8.3']
+  pull_request:
+    branches: ['8.1', '8.3']
+
+jobs:
+  pre-commit:
+    uses: coatl-dev/workflows/.github/workflows/pre-commit.yml@v6
+    with:
+      checkout-ref: ${{ github.ref }}
+
+  pylint:
+    uses: coatl-dev/workflows/.github/workflows/pylint.yml@v6
+    with:
+      path: src
+      checkout-ref: ${{ github.ref }}
+
+  tox-package:
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@v6
+
+  tox-stubs:
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: coatl-dev/workflows/.github/workflows/tox.yml@v6
+    with:
+      python-versions: |
+        3.9
+        3.10
+        3.11
+        3.12
+      working-directory: stubs
+      checkout-ref: ${{ github.ref }}
