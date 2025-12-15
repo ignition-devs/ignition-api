@@ -1,0 +1,35 @@
+ci:
+  autoupdate_commit_msg: 'build(deps): pre-commit autoupdate'
+  skip: [pylint]
+
+repos:
+  - repo: https://github.com/aio-libs/sort-all
+    rev: v1.2.0
+    hooks:
+      - id: sort-all
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+  - repo: https://github.com/PyCQA/flake8
+    rev: 5.0.4
+    hooks:
+      - id: flake8
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        additional_dependencies:
+          - '.[toml]'
+        exclude: ^(src/com/|src/java/|src/javax/|src/org/)
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
