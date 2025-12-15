@@ -11,6 +11,7 @@ jobs:
     uses: coatl-dev/workflows/.github/workflows/pre-commit.yml@v6
     with:
       checkout-ref: ${{ github.ref }}
+      skip-hooks: 'pylint'
 
   pylint:
     uses: coatl-dev/workflows/.github/workflows/pylint.yml@v6
