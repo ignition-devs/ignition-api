@@ -5,6 +5,22 @@ on:
     types: [published]
 
 jobs:
+  tox-package:
+    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@v6
+    with:
+      checkout-ref: ${{ github.event.release.tag_name }}
+
+  tox-stubs:
+    uses: coatl-dev/workflows/.github/workflows/tox.yml@v6
+    with:
+      python-versions: |
+        3.9
+        3.10
+        3.11
+        3.12
+      working-directory: stubs
+      checkout-ref: ${{ github.event.release.tag_name }}
+
   pypi-upload:
     runs-on: ubuntu-latest
     steps:
