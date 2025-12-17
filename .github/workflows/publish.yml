@@ -22,6 +22,7 @@ jobs:
       checkout-ref: ${{ github.event.release.tag_name }}
 
   pypi-upload:
+    needs: [tox-package, tox-stubs]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
