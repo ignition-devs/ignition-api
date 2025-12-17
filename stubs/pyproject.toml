@@ -39,10 +39,10 @@ dependencies = [
   "java-api-stubs",
   "types-enum34",
 ]
+urls.Documentation = "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions"
 urls.Funding = "https://github.com/sponsors/cesarcoatl"
-urls.Homepage = "https://ignition-devs.github.io/ignition-api-8.1/"
-urls.Source = "https://github.com/ignition-devs/ignition-api-8.1"
-urls.Tracker = "https://github.com/ignition-devs/ignition-api-8.1/issues"
+urls.Source = "https://github.com/ignition-devs/ignition-api/tree/8.1"
+urls.Tracker = "https://github.com/ignition-devs/ignition-api/issues"
 
 [tool.setuptools]
 include-package-data = true
