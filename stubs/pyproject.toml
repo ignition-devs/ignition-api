@@ -19,7 +19,7 @@ license = "MIT"
 authors = [ { name = "César Román", email = "cesar@coatl.dev" } ]
 requires-python = ">=3.9,<3.13"
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "Intended Audience :: Information Technology",
   "Intended Audience :: Manufacturing",
@@ -39,9 +39,10 @@ dependencies = [
   "java-api-stubs",
   "types-enum34",
 ]
+urls.Documentation = "https://docs.inductiveautomation.com/docs/8.3/appendix/scripting-functions"
 urls.Funding = "https://github.com/sponsors/cesarcoatl"
-urls.Source = "https://github.com/ignition-devs/ignition-api-8.3"
-urls.Tracker = "https://github.com/ignition-devs/ignition-api-8.3/issues"
+urls.Source = "https://github.com/ignition-devs/ignition-api/tree/8.3"
+urls.Tracker = "https://github.com/ignition-devs/ignition-api/issues"
 
 [tool.setuptools]
 include-package-data = true
