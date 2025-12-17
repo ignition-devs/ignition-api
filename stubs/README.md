@@ -4,6 +4,9 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ignition-api-stubs)](https://pypi.org/project/ignition-api-stubs/)
 [![PyPI - Version](https://img.shields.io/pypi/v/ignition-api-stubs)](https://pypi.org/project/ignition-api-stubs/)
 [![PyPI - Downloads](https://pepy.tech/badge/ignition-api-stubs)](https://pepy.tech/project/ignition-api-stubs)
+[![ignition-api-stubs](https://snyk.io/advisor/python/ignition-api-stubs/badge.svg)](https://snyk.io/advisor/python/ignition-api-stubs)
+[![ci](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml/badge.svg?branch=8.1)](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml)
+[![Join us on GitHub discussions](https://img.shields.io/badge/github-discussions-informational)](https://github.com/orgs/ignition-devs/discussions)
 
 This package contains a collection of [stubs] for [`ignition-api-8.1`]. These
 files were generated using `mypy`'s [`stubgen`].
