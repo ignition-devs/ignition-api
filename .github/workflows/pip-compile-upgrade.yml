@@ -56,10 +56,10 @@ jobs:
       - name: Commit and push changes
         if: ${{ steps.git-diff.outputs.diff == 'true' }}
         run: |
-          git checkout -B coatl-dev-pip-compile-upgrade
+          git checkout -B coatl-dev-pip-compile-upgrade-${{ matrix.branch }}
           git add --update
           git commit --file="${RUNNER_TEMP}/commit.txt"
-          git push --force --set-upstream origin coatl-dev-pip-compile-upgrade
+          git push --force --set-upstream origin coatl-dev-pip-compile-upgrade-${{ matrix.branch }}
 
       - name: Create pull request
         if: ${{ steps.git-diff.outputs.diff == 'true' }}
