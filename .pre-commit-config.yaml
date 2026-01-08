@@ -1,9 +1,3 @@
-ci:
-  autoupdate_commit_msg: 'build(deps): pre-commit autoupdate'
-  autofix_commit_msg: 'style: apply auto fixes with pre-commit'
-  skip:
-    - pylint
-
 repos:
   - repo: https://github.com/aio-libs/sort-all
     rev: v1.3.0
