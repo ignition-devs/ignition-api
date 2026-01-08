@@ -1,9 +1,15 @@
 {
   "name": "ignition-api@8.1",
   "image": "quay.io/ignition-devs/devcontainer-base:python",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
+  "workspaceFolder": "/workspaces/ignition-api",
+  "mounts": [
+    "source=pre-commit-cache,target=/root/.cache/pre-commit,type=volume"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
+        "github.vscode-github-actions",
         "ms-python.python",
         "ms-python.vscode-pylance"
       ],
@@ -13,7 +19,7 @@
     }
   },
   "postCreateCommand": {
-    "pre-commit-hooks": "pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push",
+    "pre-commit": "pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push",
     "dev-requirements": "python2 -m pip install --requirement requirements.txt"
   }
 }
