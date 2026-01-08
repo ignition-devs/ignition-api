@@ -2,9 +2,11 @@ name: ci
 
 on:
   push:
-    branches: ['8.1', '8.3']
+    branches:
+      - '8.1'
   pull_request:
-    branches: ['8.1', '8.3']
+    branches:
+      - '8.1'
 
 jobs:
   pre-commit:
@@ -19,20 +21,8 @@ jobs:
       path: src
       checkout-ref: ${{ github.ref }}
 
-  tox-package:
+  tox:
     if: ${{ github.event_name == 'pull_request' }}
-    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@v6
+    uses: ./.github/workflows/tox.yml
     with:
-      checkout-ref: ${{ github.ref }}
-
-  tox-stubs:
-    if: ${{ github.event_name == 'pull_request' }}
-    uses: coatl-dev/workflows/.github/workflows/tox.yml@v6
-    with:
-      python-versions: |
-        3.9
-        3.10
-        3.11
-        3.12
-      working-directory: stubs
       checkout-ref: ${{ github.ref }}
