@@ -1,0 +1,23 @@
+on:
+  workflow_call:
+    inputs:
+      checkout-ref:
+        required: true
+        type: string
+
+jobs:
+  tox-package:
+    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@v6
+    with:
+      checkout-ref: ${{ inputs.checkout-ref }}
+
+  tox-stubs:
+    uses: coatl-dev/workflows/.github/workflows/tox.yml@v6
+    with:
+      python-versions: |
+        3.9
+        3.10
+        3.11
+        3.12
+      working-directory: stubs
+      checkout-ref: ${{ inputs.checkout-ref }}
