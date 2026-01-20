@@ -246,7 +246,7 @@ class AbstractMutableJythonMap(MutableJythonMap):
         # type: (*PyObject, **Union[str, unicode]) -> None
         raise NotImplementedError
 
-    def __setitem__(self, pyKey, value):
+    def __setitem__(self, pyKey, pyValue):
         # type: (PyObject, PyObject) -> None
         raise NotImplementedError
 
