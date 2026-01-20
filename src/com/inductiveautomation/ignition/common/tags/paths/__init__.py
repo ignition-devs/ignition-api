@@ -16,10 +16,6 @@ from com.inductiveautomation.ignition.common.tags.model import TagPath
 
 
 class AbstractTagPath(Object, TagPath):
-    def __init__(self):
-        # type: () -> None
-        super(AbstractTagPath, self).__init__()
-
     @staticmethod
     def compareNullLow(c1, c2):
         # type: (Property, Property) -> int

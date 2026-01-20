@@ -182,11 +182,11 @@ class BrowseElement(Object):
 
     def getProperties(self):
         # type: () -> List[BrowseElement.PropertyElement]
-        return self._properties.values()
+        pass
 
     def getProperty(self, id_):
         # type: (int) -> BrowseElement.PropertyElement
-        return self._properties[id_]
+        pass
 
     def getServer(self):
         # type: () -> Union[str, unicode]
