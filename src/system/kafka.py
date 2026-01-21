@@ -76,6 +76,8 @@ def pollPartition(
     partition,  # type: int
     offset,  # type: Union[str, unicode]
     options=None,  # type: Optional[Dict[Union[str, unicode], Any]]
+    sizeCutoff=None,  # type: Optional[int]
+    timeoutMs=None,  # type: Optional[long]
 ):
     # type: (...) -> List[Any]
     """Polls a specific partition of a topic.
@@ -87,11 +89,15 @@ def pollPartition(
         offset: The position of offset to start the poll at.
         options: Custom options specific to the consumer, with key value
             string pairs. Optional
+        sizeCutoff: The total record count allowed before polling will
+            be stopped. Optional.
+        timeoutMs: The amount of time in milliseconds before polling
+            will be stopped. Optional.
 
     Returns:
         A list of records polled from a specified partition.
     """
-    print(connector, topic, partition, offset, options)
+    print(connector, topic, partition, offset, options, sizeCutoff, timeoutMs)
     return []
 
 
@@ -100,6 +106,8 @@ def pollTopic(
     topic,  # type: Union[str, unicode]
     groupId,  # type: Union[str, unicode]
     options=None,  # type: Optional[Dict[Union[str, unicode], Any]]
+    sizeCutoff=None,  # type: Optional[int]
+    timeoutMs=None,  # type: Optional[long]
 ):
     # type: (...) -> List[Any]
     """Returns a list of records from the specified topic.
@@ -111,11 +119,15 @@ def pollTopic(
             belongs to.
         options: Custom options specific to the consumer, with key value
             string pairs. Optional
+        sizeCutoff: The total record count allowed before polling will
+            be stopped. Optional.
+        timeoutMs: The amount of time in milliseconds before polling
+            will be stopped. Optional.
 
     Returns:
         A list of records from the specified topic.
     """
-    print(connector, topic, groupId, options)
+    print(connector, topic, groupId, options, sizeCutoff, timeoutMs)
     return []
 
 
