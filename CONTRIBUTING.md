@@ -144,13 +144,10 @@ The `scope` should be the name of the Python package affected.
 The following is the list of supported scopes:
 
 * **ia**: for changes to the `com.inductiveautomation` package
-* **java**: for changes to the `java` package
-* **javax**: for changes to the `javax` package
 * **org**: for changes to the `org` package
 * **pip**: for changes to Python Packaging files (`pyproject.toml`, `setup.cfg`,
   `setup.py`)
 * **system**: for changes to the `system` package
-* **thecesrom**: for changes to the `dev.thecesrom` package
 
 There are currently a few exceptions to the "use package name" rule:
 
