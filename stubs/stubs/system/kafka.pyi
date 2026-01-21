@@ -14,12 +14,16 @@ def pollPartition(
     partition: int,
     offset: Union[str, unicode],
     options: Optional[Dict[Union[str, unicode], Any]] = ...,
+    sizeCutoff: Optional[int] = ...,
+    timeoutMs: Optional[long] = ...,
 ) -> List[Any]: ...
 def pollTopic(
     connector: Union[str, unicode],
     topic: Union[str, unicode],
     groupId: Union[str, unicode],
     options: Optional[Dict[Union[str, unicode], Any]] = ...,
+    sizeCutoff: Optional[int] = ...,
+    timeoutMs: Optional[long] = ...,
 ) -> List[Any]: ...
 def seekLatest(
     connector: Union[str, unicode],
