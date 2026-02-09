@@ -88,7 +88,7 @@ def listFiles(
 
 def operate(
     deviceName,  # type: Union[str, unicode]
-    mapParams,  # type:  Dict[Union[str, unicode], Any]
+    mapParams,  # type: Dict[Union[str, unicode], Any]
     controlValue,  # type: float
 ):
     # type: (...) -> None
