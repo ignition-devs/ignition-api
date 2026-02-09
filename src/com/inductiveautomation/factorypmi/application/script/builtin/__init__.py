@@ -467,7 +467,7 @@ class WindowUtilities(Object):
 
     def passwordBox(
         self,
-        message,  # type:Union[str, unicode]
+        message,  # type: Union[str, unicode]
         title="Password",  # type: Union[str, unicode]
         echoChar="*",  # type: Union[str, unicode]
     ):
