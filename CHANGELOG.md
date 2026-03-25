@@ -1,3 +1,9 @@
+## 8.1.53 (2026-03-24)
+
+### Refactor
+
+- **ia**: fix type errors detected with ty (#12)
+
 ## 8.1.52 (2026-01-14)
 
 ### Perf
