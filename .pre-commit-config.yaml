@@ -3,6 +3,7 @@ repos:
     rev: v1.3.0
     hooks:
       - id: sort-all
+        name: sort-all
         files: ^src/
   - repo: https://github.com/bwhmather/ssort
     rev: 0.16.0
@@ -25,14 +26,11 @@ repos:
       - id: isort
         name: isort-package
         files: ^src/
-        args: [--settings-file, tox.ini]
-  - repo: https://github.com/PyCQA/isort
-    rev: 8.0.1
-    hooks:
+        args: [--settings-file=tox.ini]
       - id: isort
         name: isort-stubs
         files: ^stubs/stubs/
-        args: [--settings-file, stubs/tox.ini]
+        args: [--settings-file=stubs/tox.ini]
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.7.7
     hooks:
@@ -45,8 +43,8 @@ repos:
     hooks:
       - id: flake8
         name: flake8-package
+        args: [--config=tox.ini]
         files: ^src/
-        args: [--config, tox.ini]
         additional_dependencies: [pydoclint]
         language_version: python3.12
   - repo: https://github.com/PyCQA/flake8
@@ -57,14 +55,14 @@ repos:
         types: [file]
         files: \.(pyi)$
         additional_dependencies: [flake8-pyi]
-        args: [--config, stubs/tox.ini]
+        args: [--config=stubs/tox.ini]
   - repo: https://github.com/PyCQA/pydocstyle
     rev: 6.3.0
     hooks:
       - id: pydocstyle
         files: ^src/
         exclude: ^src/(ch|com|org)/
-        args: [--config, tox.ini]
+        args: [--config=tox.ini]
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.13.9
     hooks:
