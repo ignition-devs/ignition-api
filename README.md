@@ -4,7 +4,6 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ignition-api)](https://pypi.org/project/ignition-api/)
 [![PyPI - Version](https://img.shields.io/pypi/v/ignition-api)](https://pypi.org/project/ignition-api/)
 [![PyPI - Downloads](https://static.pepy.tech/badge/ignition-api)](https://pepy.tech/projects/ignition-api)
-[![ignition-api](https://snyk.io/advisor/python/ignition-api/badge.svg)](https://snyk.io/advisor/python/ignition-api)
 [![ci](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml/badge.svg?branch=8.1)](https://github.com/ignition-devs/ignition-api/actions/workflows/ci.yml)
 [![Join us on GitHub discussions](https://img.shields.io/badge/github-discussions-informational)](https://github.com/orgs/ignition-devs/discussions)
 
