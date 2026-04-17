@@ -1,5 +1,5 @@
 # pylint: skip-file
-"""Ignition API."""
+"""Ignition Scripting API"""
 
 from setuptools import setup
 
