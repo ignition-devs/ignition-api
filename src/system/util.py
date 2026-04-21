@@ -1012,7 +1012,7 @@ def threadDump():
     Returns:
         The dump of the current running JVM.
     """
-    return unicode("""{0}\n  "version": "{1}"...{2}""").format(
+    return unicode('{0}\n  "version": "{1}"...{2}').format(
         "{", getVersion().toParseableString(), "}"
     )
 
