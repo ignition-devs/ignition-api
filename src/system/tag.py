@@ -210,6 +210,7 @@ def exportTags(
 def getConfiguration(
     basePath,  # type: Union[str, unicode]
     recursive=False,  # type: bool
+    overridesOnly=False,  # type: bool
 ):
     # type: (...) -> List[Dict[Union[str, unicode], Any]]
     """Retrieves Tags from the Gateway as Python dictionaries.
@@ -225,6 +226,9 @@ def getConfiguration(
             will be retrieved. Note that this will only check one level
             under the base path. True recursion would require multiple
             uses of this function at different paths. Optional.
+        overridesOnly: If True, only overridden properties from UDT
+            members will be returned. If the tag is not a UDT member,
+            this parameter is ignored. Optional.
 
     Returns:
          A List of Tag dictionaries. Nested Tags are placed in a list
