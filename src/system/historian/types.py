@@ -70,8 +70,12 @@ def dataPoint(
             omitted, the current time is used. Optional.
         quality: The quality code of the data point. If omitted, a
             "good" quality is used. Optional.
+
+    Returns:
+        A data point object that can be passed to
+        system.historian.storeDataPoints.
     """
-    pass
+    return AtomicPoint()
 
 
 def metadataPoint(
@@ -96,3 +100,5 @@ def metadataPoint(
         A metadata point object that can be passed to
         system.historian.storeMetadata.
     """
+    builder = MetadataPoint.builder()
+    return builder.build()
