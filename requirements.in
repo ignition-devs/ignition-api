@@ -1,2 +1,2 @@
 enum34
-java-api
+java-api>=17.26.5
