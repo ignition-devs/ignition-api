@@ -1,4 +1,4 @@
-from copy import PyStringMap as PyStringMap  # noqa: F401
+from copy import PyStringMap as PyStringMap
 from typing import Any, Iterable, Iterator, List, Mapping, Optional, Tuple, Union
 
 from enum import Enum
