@@ -1,4 +1,3 @@
-# flake8: noqa
 from org.bson.types import Binary as Binary
 from org.bson.types import BSONTimestamp as Timestamp
 from org.bson.types import Code as Code
