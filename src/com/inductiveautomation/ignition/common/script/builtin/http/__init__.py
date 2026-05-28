@@ -30,19 +30,19 @@ class JythonHttpClient(Object):
     """
 
     def delete(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Response
+        # type: (*Any, **Union[str, unicode]) -> Response
         pass
 
     def deleteAsync(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Promise
+        # type: (*Any, **Union[str, unicode]) -> Promise
         pass
 
     def get(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Response
+        # type: (*Any, **Union[str, unicode]) -> Response
         pass
 
     def getAsync(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Promise
+        # type: (*Any, **Union[str, unicode]) -> Promise
         pass
 
     def getConnectTimeout(self):
@@ -276,7 +276,7 @@ class Promise(Object):
         return True
 
     def get(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Any
+        # type: (*Any, **Union[str, unicode]) -> Any
         pass
 
     def getFuture(self):

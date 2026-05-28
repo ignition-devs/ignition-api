@@ -78,7 +78,7 @@ class AbstractOPCUtilities(Object):
         ]
 
     def getServers(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> List[Union[str, unicode]]  # noqa: W505
+        # type: (*Any, **Union[str, unicode]) -> List[Union[str, unicode]]  # noqa: W505
         pass
 
     def getServerState(self, opcServer):
@@ -110,11 +110,11 @@ class AbstractOPCUtilities(Object):
         pass
 
     def writeValue(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> QualityCode
+        # type: (*Any, **Union[str, unicode]) -> QualityCode
         pass
 
     def writeValues(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> List[QualityCode]
+        # type: (*Any, **Union[str, unicode]) -> List[QualityCode]
         pass
 
 
@@ -422,7 +422,7 @@ class DatasetUtilities(Object):
 
     @staticmethod
     def toCSV(*args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Union[str, unicode]  # noqa: W505
+        # type: (*Any, **Union[str, unicode]) -> Union[str, unicode]  # noqa: W505
         pass
 
     @staticmethod
@@ -442,7 +442,7 @@ class DatasetUtilities(Object):
 
     @staticmethod
     def toExcel(*args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> bytearray
+        # type: (*Any, **Union[str, unicode]) -> bytearray
         pass
 
     @staticmethod
@@ -806,5 +806,5 @@ class SystemUtilities(Object):
 
     @staticmethod
     def parseTranslateArguments(*args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> Tuple[Union[str, unicode], Union[str, unicode], bool]  # noqa: E501, W505  # pylint: disable=line-too-long
+        # type: (*Any, **Union[str, unicode]) -> Tuple[Union[str, unicode], Union[str, unicode], bool]  # noqa: E501, W505  # pylint: disable=line-too-long
         pass
