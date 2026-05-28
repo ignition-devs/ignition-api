@@ -119,7 +119,7 @@ class MutableJythonMap(object):
         raise NotImplementedError
 
     def update(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> None
+        # type: (*Any, **Union[str, unicode]) -> None
         raise NotImplementedError
 
     def __setitem__(self, pyKey, pyValue):
@@ -154,7 +154,7 @@ class MutableJythonSequence(JythonSequence):
         raise NotImplementedError
 
     def sort(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> None
+        # type: (*Any, **Union[str, unicode]) -> None
         raise NotImplementedError
 
     def __add__(self, other):
@@ -243,7 +243,7 @@ class AbstractMutableJythonMap(MutableJythonMap):
         pass
 
     def update(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> None
+        # type: (*Any, **Union[str, unicode]) -> None
         raise NotImplementedError
 
     def __setitem__(self, pyKey, pyValue):
@@ -278,5 +278,5 @@ class AbstractMutableJythonSequence(AbstractJythonSequence, MutableJythonSequenc
         raise NotImplementedError
 
     def sort(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> None
+        # type: (*Any, **Union[str, unicode]) -> None
         pass
