@@ -1,3 +1,9 @@
+## 8.3.6.post2 (2026-05-28)
+
+### Refactor
+
+- **ia**: use Any as argument instead of PyObject (#33)
+
 ## 8.3.6.post1 (2026-04-29)
 
 ## 8.3.6 (2026-04-29)
