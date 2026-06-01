@@ -1333,7 +1333,7 @@ class PyList(PySequenceList):
         pass
 
     def sort(self, *args):
-        # type: (*PyObject) -> None
+        # type: (*Any) -> None
         pass
 
     def subList(self, fromIndex, toIndex):
