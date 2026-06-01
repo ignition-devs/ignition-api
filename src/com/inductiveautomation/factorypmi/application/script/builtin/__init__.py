@@ -458,7 +458,7 @@ class WindowUtilities(Object):
         pass
 
     def openDesktop(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> JFrame
+        # type: (*Any, **Union[str, unicode]) -> JFrame
         pass
 
     def openDiagnostics(self):
@@ -497,7 +497,7 @@ class WindowUtilities(Object):
         pass
 
     def transform(self, *args, **kwargs):
-        # type: (*PyObject, **Union[str, unicode]) -> PyObject
+        # type: (*Any, **Union[str, unicode]) -> PyObject
         pass
 
     def warningBox(self, message, title="Warning"):
