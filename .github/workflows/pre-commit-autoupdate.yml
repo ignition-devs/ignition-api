@@ -11,11 +11,11 @@ jobs:
       matrix:
         branch: ['8.1', '8.3']
       fail-fast: false
-    uses: coatl-dev/workflows/.github/workflows/pre-commit-autoupdate.yml@v6
+    uses: coatl-dev/workflows/.github/workflows/pre-commit-autoupdate.yml@8d3c0aba2a053986bce9382063facccf1fd98247 # v7.0.0
     with:
+      autoupdate-branch:  '${{ matrix.branch }}'
       checkout-ref: ${{ matrix.branch }}
-      pr-create-additional-args: '--base ${{ matrix.branch }}'
-      pr-branch: coatl-dev-pre-commit-autoupdate-${{ matrix.branch }}
+      pr-branch: ${{ matrix.branch }}-coatl-dev-pre-commit-autoupdate
     secrets:
       gh-token: ${{ secrets.COATL_BOT_GH_TOKEN }}
       gpg-sign-passphrase: ${{ secrets.COATL_BOT_GPG_PASSPHRASE }}
