@@ -1,3 +1,13 @@
+## 8.3.7 (2026-06-10)
+
+### Feat
+
+- **system**: add secrets module (#41)
+
+### Refactor
+
+- **ia**: use Any as argument instead of PyObject (#33)
+
 ## 8.3.6.post2 (2026-05-28)
 
 ### Refactor
