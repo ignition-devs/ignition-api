@@ -68,7 +68,6 @@ __all__ = [
     "runPrepUpdate",
     "runSFPrepUpdate",
     "runScalarPrepQuery",
-    "runUpdateQuery",
     "setDatasourceConnectURL",
     "setDatasourceEnabled",
     "setDatasourceMaxConnections",
@@ -712,52 +711,6 @@ def runScalarPrepQuery(
     """
     print(query, args, database, tx)
     return 42
-
-
-def runUpdateQuery(
-    query,  # type: Union[str, unicode]
-    database="",  # type: Union[str, unicode]
-    tx=None,  # type: Union[str, unicode, None]
-    getKey=False,  # type: bool
-    skipAudit=True,  # type: bool
-):
-    # type: (...) -> int
-    """Runs a query against a database connection, returning the number
-    of rows affected.
-
-    Typically this is an UPDATE, INSERT, or DELETE query. If no database
-    is specified, or the database is the empty-string "", then the
-    current project's default database connection will be used.
-
-    Note:
-        You may want to use the runPrepUpdate query if your query is
-        constructed with user input (to avoid the user's input from
-        breaking your syntax) or if you need to insert binary or BLOB
-        data.
-
-    Args:
-        query: A SQL query, usually an INSERT, UPDATE, or DELETE query,
-            to run.
-        database: The name of the database connection to execute
-            against. If omitted or "", the project's default database
-            connection will be used.
-        tx: A transaction identifier. If omitted, the update will be
-            executed in its own transaction.
-        getKey: A flag indicating whether or not the result should be
-            the number of rows returned (getKey=0) or the newly
-            generated key value that was created as a result of the
-            update (getKey=1). Not all databases support automatic
-            retrieval of generated keys.
-        skipAudit: A flag which, if set to True, will cause the update
-            query to skip the audit system. Useful for some queries that
-            have fields which won't fit into the audit log.
-
-    Returns:
-        The number of rows affected by the query, or the key value that
-        was generated, depending on the value of the getKey flag.
-    """
-    print(query, database, tx, getKey, skipAudit)
-    return 1
 
 
 def setDatasourceConnectURL(name, connectUrl):

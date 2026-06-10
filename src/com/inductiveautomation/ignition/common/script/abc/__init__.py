@@ -5,6 +5,7 @@ __all__ = [
     "AbstractJythonSequence",
     "AbstractMutableJythonMap",
     "AbstractMutableJythonSequence",
+    "ContextManager",
     "JythonMap",
     "JythonSequence",
     "MutableJythonMap",
@@ -280,3 +281,17 @@ class AbstractMutableJythonSequence(AbstractJythonSequence, MutableJythonSequenc
     def sort(self, *args, **kwargs):
         # type: (*Any, **Union[str, unicode]) -> None
         pass
+
+
+class ContextManager(PyObject):
+    def __init__(self):
+        # type: () -> None
+        super(ContextManager, self).__init__()
+
+    def __enter__(self):
+        # type: () -> None
+        print("Enter")
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # type: (object, object, object) -> None
+        print("Exit")
