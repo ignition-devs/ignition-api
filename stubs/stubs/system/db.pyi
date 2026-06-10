@@ -128,13 +128,6 @@ def runScalarPrepQuery(
     database: Union[str, unicode] = ...,
     tx: Union[str, unicode, None] = ...,
 ) -> Any: ...
-def runUpdateQuery(
-    query: Union[str, unicode],
-    database: Union[str, unicode] = ...,
-    tx: Union[str, unicode, None] = ...,
-    getKey: bool = ...,
-    skipAudit: bool = ...,
-) -> int: ...
 def setDatasourceConnectURL(
     name: Union[str, unicode], connectUrl: Union[str, unicode]
 ) -> None: ...
