@@ -8,13 +8,12 @@
 [![Join us on GitHub discussions](https://img.shields.io/badge/github-discussions-informational)](https://github.com/orgs/ignition-devs/discussions)
 
 ignition-api is a Python package that allows developers to get code completion
-for Ignition Scripting API scripting functions in their IDE of choice.
+for Ignition Scripting API functions in their IDE of choice.
 
 ## Table of contents
 
 - [Prerequisites](#prerequisites)
-- [Installation and usage](#installation-and-usage)
-  - [Installing with pip](#installing-with-pip)
+- [Installation](#installation)
 - [Stubs](#stubs)
 - [Project structure](#project-structure)
   - [Packages](#packages)
@@ -29,23 +28,20 @@ for Ignition Scripting API scripting functions in their IDE of choice.
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed [Python 2.7.18]
-- You are familiar with [Ignition System Functions]
+- [Python 2.7.18]
+- Familiarity with [Ignition System Functions]
 
-## Installation and usage
+## Installation
 
-### Installing with `pip`
-
-The preferred method is to install it by running `pip`. It requires Python
-2.7.18.
+Requires [Python 2.7.18].
 
 ```bash
 python2 -m pip install ignition-api
 ```
 
-This will install it as package to your Python installation, which will allow
-you to call Ignition Scripting functions from Python's REPL, and get code
-completion using an IDE such as PyCharm and Visual Studio Code.
+This installs the package to your Python 2 installation, allowing you to
+call Ignition Scripting functions from Python's REPL and get code completion
+in IDEs such as PyCharm and Visual Studio Code.
 
 ```bash
 $ python2
@@ -64,7 +60,7 @@ Client data, as well as interact with other various systems.
 >>> quit()
 ```
 
-And to uninstall:
+To uninstall:
 
 ```bash
 python2 -m pip uninstall ignition-api
@@ -75,10 +71,6 @@ python2 -m pip uninstall ignition-api
 [`ignition-api-stubs`] is a companion package that provides Python type stubs
 (`.pyi` files) for the Ignition Scripting API. Type stubs enable static type
 checking and enhanced IDE support for code that depends on `ignition-api`.
-
-The recommended use of `ignition-api-stubs` is to enable type checking of your
-Ignition scripting code using [`mypy`]. This allows you to catch type-related
-errors during development before deploying to your Ignition gateway.
 
 ## Project structure
 
@@ -109,7 +101,7 @@ Libraries for Java 32.0.1-jre API. For more information, see documentation here:
 
 This package includes supporting Inductive Automation's classes and interfaces.
 For more information, see documentation here:
-<https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.52/index.html>.
+<https://sdk.inductiveautomation.com/javadoc/ignition81/8.1.53/index.html>.
 
 #### org.apache
 
@@ -141,7 +133,7 @@ This package includes supporting classes and interfaces from Mongo Java driver
 
 This package includes supporting classes and interfaces from the Inductive
 Automation's `org.json` package, see documentation here:
-<https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.52/org/json/package-summary.html>
+<https://sdk.inductiveautomation.com/javadoc/ignition81/8.1.53/org/json/package-summary.html>
 
 #### org.python
 
@@ -197,5 +189,4 @@ provided as-is for development assistance purposes.
 [Ignition System Functions]: https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions
 [LICENSE]: https://github.com/ignition-devs/ignition-api/blob/8.1/LICENSE
 [Microsoft Open Source Code of Conduct]: https://opensource.microsoft.com/codeofconduct/
-[`mypy`]: https://coatl-mypy.readthedocs.io/en/v0.971/
 [Python 2.7.18]: https://www.python.org/downloads/release/python-2718/
