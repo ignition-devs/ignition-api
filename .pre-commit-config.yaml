@@ -62,7 +62,7 @@ repos:
         exclude: ^src/(ch|com|org)/
         args: [--config=tox.ini]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.16.3
+    rev: v4.16.4
     hooks:
       - id: commitizen
       - id: commitizen-branch
