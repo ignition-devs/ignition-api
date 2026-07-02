@@ -1,3 +1,9 @@
+## 8.1.54 (2026-07-02)
+
+### Refactor
+
+- **ia**: use *Any as argument instead of *PyObject (#34)
+
 ## 8.1.53 (2026-03-24)
 
 ### Refactor
