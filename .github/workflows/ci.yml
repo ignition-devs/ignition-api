@@ -16,7 +16,7 @@ jobs:
       skip-hooks: 'pylint'
 
   pylint:
-    uses: coatl-dev/workflows/.github/workflows/pylint.yml@8d3c0aba2a053986bce9382063facccf1fd98247 # v7.0.0
+    uses: coatl-dev/workflows/.github/workflows/pylint.yml@3b10e4c46730151093c7ccbc52fd689a48b94726 # v7.0.16
     with:
       path: src
       checkout-ref: ${{ github.ref }}
