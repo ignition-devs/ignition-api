@@ -20,12 +20,12 @@ jobs:
           ref: ${{ github.event.release.tag_name }}
 
       - name: Upload package to PyPI
-        uses: coatl-dev/actions/pypi-upload@208567f6e604baf94c6e867ec7f345ec9ad36eb4 # v7.0.0
+        uses: coatl-dev/actions/pypi-upload@05b877c5c64fc3ddb9e87f47400311ebf64fe9d5 # v7.0.9
         with:
           password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_PKG }}
 
       - name: Upload stubs to PyPI
-        uses: coatl-dev/actions/pypi-upload@208567f6e604baf94c6e867ec7f345ec9ad36eb4 # v7.0.0
+        uses: coatl-dev/actions/pypi-upload@05b877c5c64fc3ddb9e87f47400311ebf64fe9d5 # v7.0.9
         with:
           python-version: '3.12'
           password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_STUBS }}
