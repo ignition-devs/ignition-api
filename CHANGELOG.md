@@ -1,3 +1,13 @@
+## 8.3.8 (2026-07-17)
+
+### Feat
+
+- **system**: add config submodule (#56)
+
+### Refactor
+
+- **system**: add system.secrets functions (#57)
+
 ## 8.3.7 (2026-06-10)
 
 ### Feat
