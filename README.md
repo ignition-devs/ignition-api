@@ -101,7 +101,7 @@ Libraries for Java 32.0.1-jre API. For more information, see documentation here:
 
 This package includes supporting Inductive Automation's classes and interfaces.
 For more information, see documentation here:
-<https://sdk.inductiveautomation.com/javadoc/ignition83/8.3.7/index.html>.
+<https://sdk.inductiveautomation.com/javadoc/ignition83/8.3.8/index.html>.
 
 #### org.apache
 
@@ -133,13 +133,13 @@ This package includes supporting classes and interfaces from Mongo Java driver
 
 This package includes supporting classes and interfaces from the Inductive
 Automation's `org.json` package, see documentation here:
-<https://sdk.inductiveautomation.com/javadoc/ignition83/8.3.7/org/json/package-summary.html>
+<https://sdk.inductiveautomation.com/javadoc/ignition83/8.3.8/org/json/package-summary.html>
 
 #### org.python
 
 This package includes supporting Jython classes and interfaces. For more
 information, see documentation here:
-<https://www.javadoc.io/doc/org.python/jython-standalone/2.7.3/index.html>.
+<https://www.javadoc.io/doc/org.python/jython-standalone/2.7.4/index.html>.
 
 #### org.slf4j
 
