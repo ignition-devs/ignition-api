@@ -1,7 +1,7 @@
 from typing import Optional, Union
 
 from java.io import Closeable
-from java.lang import Object
+from java.lang import Exception, Object, Throwable
 from java.nio.charset import Charset
 
 
@@ -35,3 +35,9 @@ class Plaintext(Object, Closeable):
     def getBytes(self):
         # type: () -> bytearray
         pass
+
+
+class SecretException(Exception):
+    def __init__(self, message, cause=None):
+        # type: (str, Optional[Throwable]) -> None
+        super(SecretException, self).__init__(message, cause)
