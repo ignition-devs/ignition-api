@@ -7,10 +7,13 @@ Secret Providers on the Gateway.
 from __future__ import print_function
 
 __all__ = [
+    "createEmbeddedSecretConfig",
+    "createReferencedSecretConfig",
     "decrypt",
     "encrypt",
     "getProviders",
     "getSecrets",
+    "readConfiguredSecretValue",
     "readSecretValue",
 ]
 
@@ -21,7 +24,52 @@ from com.inductiveautomation.ignition.common.secrets import (
     SecretMeta,
     SecretProviderMeta,
 )
-from com.inductiveautomation.ignition.gateway.secrets import Plaintext
+from com.inductiveautomation.ignition.gateway.secrets import Plaintext, SecretException
+from org.python.core import PyObject
+
+
+def createEmbeddedSecretConfig(json):
+    # type: (Any) -> PyObject
+    """Creates a new Embedded SecretConfig instance given the JSON
+    representation of the encrypted data.
+
+    Args:
+        json: The JSON object containing the encrypted secret.
+
+    Returns:
+        A Dictionary containing the JSON representation of an Embedded
+        SecretConfig instance containing the encrypted secret.
+
+    Raises:
+        ValueError: Throws a ValueError if there is no JSON.
+    """
+    if not json:
+        raise ValueError("No JSON provided for creating an Embedded SecretConfig.")
+    return PyObject()
+
+
+def createReferencedSecretConfig(providerName, secretName):
+    # type: (Union[str, unicode], Union[str, unicode]) -> PyObject
+    """Creates a new Referenced SecretConfig instance given the name of
+    the secret provider and the name of the secret stored in the
+    provider.
+
+    Args:
+        providerName: The name of the Secret Provider to reference.
+        secretName: The name of the secret to reference.
+
+    Returns:
+        PyObject: A Dictionary containing the JSON representation of a
+            Referenced SecretConfig instance with the provider and
+            secret names.
+
+    Raises:
+        ValueError: Throws a ValueError if the providerName or
+            secretName parameters do not have any values.
+    """
+    if not providerName or not secretName:
+        raise ValueError("Both providerName and secretName must be provided.")
+    return PyObject()
 
 
 def decrypt(json):
@@ -94,6 +142,28 @@ def getSecrets(providerName):
     """
     print(providerName)
     return [SecretMeta("SecretName")]
+
+
+def readConfiguredSecretValue(secretConfig):
+    # type: (Any) -> PyPlaintext
+    """Reads the value of a secret configured by its SecretConfig.
+
+    Args:
+        secretConfig: The JSON object containing the SecretConfig.
+
+    Returns:
+        A PyPlaintext instance containing the specified secret.
+
+    Raises:
+        ValueError: Throws a ValueError if there is no JSON.
+        SecretException: Throws a SecretException if there is a problem
+            reading the secret.
+    """
+    if not secretConfig:
+        raise ValueError("There is no JSON.")
+    if not isinstance(secretConfig, dict):
+        raise SecretException("There is a problem eading the secret.")
+    return PyPlaintext(Plaintext())
 
 
 def readSecretValue(providerName, secretName):

@@ -1,7 +1,8 @@
 from typing import Optional, Union
 
 from java.io import Closeable
-from java.lang import Object
+from java.lang import Exception, Object
+from java.lang import Throwable as Throwable
 from java.nio.charset import Charset as Charset
 
 class Plaintext(Object, Closeable):
@@ -16,3 +17,6 @@ class Plaintext(Object, Closeable):
     ) -> Plaintext: ...
     def getAsString(self) -> Union[str, unicode]: ...
     def getBytes(self) -> bytearray: ...
+
+class SecretException(Exception):
+    def __init__(self, message: str, cause: Optional[Throwable] = ...) -> None: ...
