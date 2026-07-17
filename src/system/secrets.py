@@ -162,7 +162,7 @@ def readConfiguredSecretValue(secretConfig):
     if not secretConfig:
         raise ValueError("There is no JSON.")
     if not isinstance(secretConfig, dict):
-        raise SecretException("There is a problem eading the secret.")
+        raise SecretException("There is a problem reading the secret.")
     return PyPlaintext(Plaintext())
 
 
