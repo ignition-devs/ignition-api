@@ -139,7 +139,7 @@ Automation's `org.json` package, see documentation here:
 
 This package includes supporting Jython classes and interfaces. For more
 information, see documentation here:
-<https://www.javadoc.io/doc/org.python/jython-standalone/2.7.3/index.html>.
+<https://www.javadoc.io/doc/org.python/jython-standalone/2.7.4/index.html>.
 
 #### org.slf4j
 
