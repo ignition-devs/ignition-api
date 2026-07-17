@@ -326,10 +326,10 @@ def replace(
     actor=None,  # type: Union[str, unicode, None]
 ):
     # type: (...) -> PyResource
-    """Copies a resource to a new name and/or collection.
+    """Replaces an existing resource completely with a new
+    configuration.
 
-    When using this function, either the newName or newCollection
-    parameter must be defined.
+    The resource must already exist.
 
     Args:
         moduleId: The module ID portion of the resource type identifier.
