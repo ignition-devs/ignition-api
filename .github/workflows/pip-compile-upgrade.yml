@@ -19,7 +19,7 @@ jobs:
           ref: ${{ matrix.branch }}
 
       - name: Upgrade package requirements
-        uses: coatl-dev/actions/pip-compile-upgrade@208567f6e604baf94c6e867ec7f345ec9ad36eb4 # v7.0.0
+        uses: coatl-dev/actions/pip-compile-upgrade@eaeed3dde61077bd254f6c8b9b523b0a6b182e19 # v7.0.11
         with:
           path: requirements.txt
 
