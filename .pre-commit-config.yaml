@@ -20,7 +20,7 @@ repos:
       - id: unimport
         files: ^src/
   - repo: https://github.com/PyCQA/isort
-    rev: 9.0.0a3
+    rev: 9.0.0b1
     hooks:
       - id: isort
         name: isort-package
@@ -62,7 +62,7 @@ repos:
         exclude: ^src/(ch|com|org)/
         args: [--config=tox.ini]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.16.4
+    rev: v4.17.0
     hooks:
       - id: commitizen
       - id: commitizen-branch
