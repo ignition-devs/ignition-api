@@ -1,3 +1,9 @@
+## 8.3.9 (2026-08-26)
+
+### Refactor
+
+- **system**: remove parameters from historian functions
+
 ## 8.3.8 (2026-07-17)
 
 ### Feat
