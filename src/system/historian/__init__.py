@@ -62,12 +62,9 @@ def queryAggregatedPoints(
     startTime=None,  # type: Optional[Date]
     endTime=None,  # type: Optional[Date]
     aggregates=None,  # type: Optional[List[Union[str, unicode]]]
-    fillModes=None,  # type: Optional[List[Union[str, unicode]]]
     columnNames=None,  # type: Optional[List[Union[str, unicode]]]
     returnFormat="Wide",  # type: str
     returnSize=1,  # type: int
-    includeBounds=False,  # type: bool
-    excludeObservations=False,  # type: bool
 ):
     # type: (...) -> BasicDataset
     """Queries aggregated data points for the specified historian.
@@ -79,15 +76,10 @@ def queryAggregatedPoints(
         endTime: An end time to query aggregated data points for.
         aggregates: A list of aggregate functions to apply to the query.
             Optional.
-        fillModes: A list of fill modes to apply to the query. Optional.
         columnNames: A list of alias column names for the returned
             dataset. Optional.
         returnFormat: The desired return format for the query. Optional.
         returnSize: The number maximum of results to return. Optional.
-        includeBounds: Whether to include the bounds in the query
-            results. Optional.
-        excludeObservations: Whether to exclude observed aggregated data
-            points in the query results. Optional.
 
     Returns:
         A dataset representing the aggregated points for the specified
@@ -98,12 +90,9 @@ def queryAggregatedPoints(
         startTime,
         endTime,
         aggregates,
-        fillModes,
         columnNames,
         returnFormat,
         returnSize,
-        includeBounds,
-        excludeObservations,
     )
     return BasicDataset()
 
@@ -161,8 +150,6 @@ def queryRawPoints(
     columnNames=None,  # type: Optional[List[Union[str, unicode]]]
     returnFormat="Wide",  # type: str
     returnSize=-1,  # type: int
-    includeBounds=False,  # type: bool
-    excludeObservations=False,  # type: bool
 ):
     # type: (...) -> BasicDataset
     """Queries raw data points for the specified Historian.
@@ -176,10 +163,6 @@ def queryRawPoints(
             dataset. Optional.
         returnFormat: The desired return format for the query. Optional.
         returnSize: The maximum number of results to return. Optional.
-        includeBounds: Whether to include the bounds in the query
-            results. Optional.
-        excludeObservations: Whether to exclude observed raw data points
-            in the query results. Optional.
 
     Returns:
         A dataset representing the raw data points for the specified
@@ -192,8 +175,6 @@ def queryRawPoints(
         columnNames,
         returnFormat,
         returnSize,
-        includeBounds,
-        excludeObservations,
     )
     return BasicDataset()
 
