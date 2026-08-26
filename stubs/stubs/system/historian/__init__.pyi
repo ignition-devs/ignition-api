@@ -14,12 +14,9 @@ def queryAggregatedPoints(
     startTime: Optional[Date] = ...,
     endTime: Optional[Date] = ...,
     aggregates: Optional[List[Union[str, unicode]]] = ...,
-    fillModes: Optional[List[Union[str, unicode]]] = ...,
     columnNames: Optional[List[Union[str, unicode]]] = ...,
     returnFormat: str = ...,
     returnSize: int = ...,
-    includeBounds: bool = ...,
-    excludeObservations: bool = ...,
 ) -> BasicDataset: ...
 def queryAnnotations(
     paths: List[Union[str, unicode]],
@@ -39,8 +36,6 @@ def queryRawPoints(
     columnNames: Optional[List[Union[str, unicode]]] = ...,
     returnFormat: str = ...,
     returnSize: int = ...,
-    includeBounds: bool = ...,
-    excludeObservations: bool = ...,
 ) -> BasicDataset: ...
 def storeAnnotations(*args: Any, **kwargs: Any) -> List[BasicQualifiedValue]: ...
 def storeDataPoints(*args: Any, **kwargs: Any) -> List[BasicQualifiedValue]: ...
