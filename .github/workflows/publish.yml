@@ -6,7 +6,7 @@ on:
 
 jobs:
   tox:
-    uses: ./.github/workflows/tox.yml
+    uses: $/.github/workflows/tox.yml
     with:
       checkout-ref: ${{ github.event.release.tag_name }}
 

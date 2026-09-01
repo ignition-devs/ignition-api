@@ -23,6 +23,6 @@ jobs:
 
   tox:
     if: ${{ github.event_name == 'pull_request' }}
-    uses: ./.github/workflows/tox.yml
+    uses: $/.github/workflows/tox.yml
     with:
       checkout-ref: ${{ github.ref }}
