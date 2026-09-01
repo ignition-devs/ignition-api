@@ -12,7 +12,7 @@ jobs:
       checkout-ref: ${{ inputs.checkout-ref }}
 
   tox-stubs:
-    uses: coatl-dev/workflows/.github/workflows/tox.yml@ac7772bd171c548f66cbd19be77872dfd6e326ce # v7.0.24
+    uses: coatl-dev/workflows/.github/workflows/tox.yml@0d24a98543a7e17f432503425e6ef836972864bb # v7.0.28
     with:
       python-versions: |
         3.9
