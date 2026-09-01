@@ -4,6 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      coatl-dev-actions:
+        patterns:
+          - "coatl-dev/actions/**"
+      coatl-dev-workflows:
+        patterns:
+          - "coatl-dev/workflows/**"
     target-branch: "8.3"
     labels: ["dependencies"]
     commit-message:
@@ -14,6 +21,13 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      coatl-dev-actions:
+        patterns:
+          - "coatl-dev/actions/**"
+      coatl-dev-workflows:
+        patterns:
+          - "coatl-dev/workflows/**"
     target-branch: "8.1"
     labels: ["dependencies"]
     commit-message:
