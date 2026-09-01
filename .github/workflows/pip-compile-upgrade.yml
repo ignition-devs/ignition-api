@@ -24,7 +24,7 @@ jobs:
           path: requirements.txt
 
       - name: Upgrade stubs requirements
-        uses: coatl-dev/actions/uv-pip-compile-upgrade@05b877c5c64fc3ddb9e87f47400311ebf64fe9d5 # v7.0.9
+        uses: coatl-dev/actions/uv-pip-compile-upgrade@45ee24a8c8397a346538acefea6221e30076fa66 # v7.0.14
         with:
           path: requirements.txt
           python-version: '3.12'
