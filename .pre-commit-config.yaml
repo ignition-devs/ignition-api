@@ -6,7 +6,7 @@ repos:
         name: sort-all
         files: ^src/
   - repo: https://github.com/bwhmather/ssort
-    rev: 0.16.0
+    rev: 0.17.0
     hooks:
       - id: ssort
         files: ^src/
@@ -20,7 +20,7 @@ repos:
       - id: unimport
         files: ^src/
   - repo: https://github.com/PyCQA/isort
-    rev: 9.0.0b1
+    rev: 9.0.1
     hooks:
       - id: isort
         name: isort-package
@@ -62,7 +62,7 @@ repos:
         exclude: ^src/(ch|com|org)/
         args: [--config=tox.ini]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.17.0
+    rev: v4.18.0
     hooks:
       - id: commitizen
       - id: commitizen-branch
