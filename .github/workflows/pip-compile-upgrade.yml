@@ -38,7 +38,7 @@ jobs:
 
       - name: Import GPG key
         if: ${{ steps.git-diff.outputs.diff == 'true' }}
-        uses: coatl-dev/actions/gpg-import@208567f6e604baf94c6e867ec7f345ec9ad36eb4 # v7.0.0
+        uses: coatl-dev/actions/gpg-import@45ee24a8c8397a346538acefea6221e30076fa66 # v7.0.14
         with:
           passphrase: ${{ secrets.COATL_BOT_GPG_PASSPHRASE }}
           private-key: ${{ secrets.COATL_BOT_GPG_PRIVATE_KEY }}
@@ -63,7 +63,7 @@ jobs:
 
       - name: Create pull request
         if: ${{ steps.git-diff.outputs.diff == 'true' }}
-        uses: coatl-dev/actions/pr-create@208567f6e604baf94c6e867ec7f345ec9ad36eb4 # v7.0.0
+        uses: coatl-dev/actions/pr-create@45ee24a8c8397a346538acefea6221e30076fa66 # v7.0.14
         with:
           gh-token: ${{ secrets.COATL_BOT_GH_TOKEN }}
           base-branch:  '${{ matrix.branch }}'
