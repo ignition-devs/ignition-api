@@ -19,7 +19,7 @@ __all__ = [
     "updateRegisteredNodePath",
 ]
 
-from typing import Any, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from java.util import Date
 
@@ -65,6 +65,7 @@ def queryAggregatedPoints(
     columnNames=None,  # type: Optional[List[Union[str, unicode]]]
     returnFormat="Wide",  # type: str
     returnSize=1,  # type: int
+    extendedProperties=None,  # type: Optional[Dict[Union[str, unicode], Any]]
 ):
     # type: (...) -> BasicDataset
     """Queries aggregated data points for the specified historian.
@@ -80,6 +81,8 @@ def queryAggregatedPoints(
             dataset. Optional.
         returnFormat: The desired return format for the query. Optional.
         returnSize: The number maximum of results to return. Optional.
+        extendedProperties: A dictionary of extended query properties
+            for the SQL Historian only. Optional.
 
     Returns:
         A dataset representing the aggregated points for the specified
@@ -93,6 +96,7 @@ def queryAggregatedPoints(
         columnNames,
         returnFormat,
         returnSize,
+        extendedProperties,
     )
     return BasicDataset()
 

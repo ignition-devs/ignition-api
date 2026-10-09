@@ -1,4 +1,4 @@
-from typing import Any, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from com.inductiveautomation.ignition.common import BasicDataset
 from com.inductiveautomation.ignition.common.browsing import Results
@@ -17,6 +17,7 @@ def queryAggregatedPoints(
     columnNames: Optional[List[Union[str, unicode]]] = ...,
     returnFormat: str = ...,
     returnSize: int = ...,
+    extendedProperties: Optional[Dict[Union[str, unicode], Any]] = ...,
 ) -> BasicDataset: ...
 def queryAnnotations(
     paths: List[Union[str, unicode]],
