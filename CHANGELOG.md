@@ -1,3 +1,9 @@
+## 8.3.10 (2026-10-08)
+
+### Refactor
+
+- **system**: add extendedProperties parameter (#96)
+
 ## 8.3.9.post1 (2026-08-26)
 
 ## 8.3.9 (2026-08-26)
