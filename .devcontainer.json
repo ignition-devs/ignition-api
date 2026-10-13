@@ -4,7 +4,9 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
   "workspaceFolder": "/workspaces/ignition-api",
   "mounts": [
-    "source=pre-commit-cache,target=/root/.cache/pre-commit,type=volume"
+    "source=pre-commit-cache,target=/root/.cache/pre-commit,type=volume",
+    "source=ignition-api-8.3-tox,target=${containerWorkspaceFolder}/.tox,type=volume",
+    "source=ignition-api-8.3-tox-stubs,target=${containerWorkspaceFolder}/stubs/.tox,type=volume"
   ],
   "customizations": {
     "vscode": {
