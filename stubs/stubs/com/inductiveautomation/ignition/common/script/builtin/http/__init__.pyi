@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 from com.inductiveautomation.ignition.common.gson import Gson
 from java.lang import Object
@@ -177,6 +177,18 @@ class JythonHttpClient(Object):
         password: Union[str, unicode, None] = ...,
         timeout: Optional[long] = ...,
     ) -> Promise: ...
+    def __call__(
+        self,
+        timeout: int = ...,
+        bypass_cert_validation: bool = ...,
+        username: Union[str, unicode, None] = ...,
+        password: Union[str, unicode, None] = ...,
+        proxy: Union[str, unicode, None] = ...,
+        cookie_policy: Union[str, unicode] = ...,
+        redirect_policy: Union[str, unicode] = ...,
+        version: Union[str, unicode] = ...,
+        customizer: Optional[Callable[..., Any]] = ...,
+    ) -> JythonHttpClient: ...
 
 class Promise(Object):
     def cancel(self) -> bool: ...

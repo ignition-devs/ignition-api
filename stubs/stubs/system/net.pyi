@@ -1,23 +1,14 @@
-from typing import Any, Callable, List, Optional, Union
+from typing import List, Optional, Union
 
 from com.inductiveautomation.ignition.common.script.builtin.http import JythonHttpClient
+
+httpClient: JythonHttpClient
 
 def getHostName() -> Union[str, unicode]: ...
 def getIpAddress() -> Union[str, unicode]: ...
 def getRemoteServers(
     runningOnly: Optional[bool] = ...,
 ) -> List[Union[str, unicode]]: ...
-def httpClient(
-    timeout: int = ...,
-    bypass_cert_validation: bool = ...,
-    username: Union[str, unicode, None] = ...,
-    password: Union[str, unicode, None] = ...,
-    proxy: Union[str, unicode, None] = ...,
-    cookie_policy: Union[str, unicode] = ...,
-    redirect_policy: Union[str, unicode] = ...,
-    version: Union[str, unicode] = ...,
-    customizer: Optional[Callable[..., Any]] = ...,
-) -> JythonHttpClient: ...
 def sendEmail(
     smtp: Union[str, unicode, None] = ...,
     fromAddr: Union[str, unicode] = ...,
