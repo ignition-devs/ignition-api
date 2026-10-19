@@ -14,11 +14,13 @@ __all__ = [
 ]
 
 import socket
-from typing import Any, Callable, List, Optional, Union
+from typing import List, Optional, Union
 
 from java.lang import IllegalArgumentException
 
 from com.inductiveautomation.ignition.common.script.builtin.http import JythonHttpClient
+
+httpClient = JythonHttpClient()  # type: JythonHttpClient
 
 
 def getHostName():
@@ -63,81 +65,6 @@ def getRemoteServers(runningOnly=True):
     """
     print(runningOnly)
     return []
-
-
-def httpClient(
-    timeout=60000,  # type: int
-    bypass_cert_validation=False,  # type: bool
-    username=None,  # type: Union[str, unicode, None]
-    password=None,  # type: Union[str, unicode, None]
-    proxy=None,  # type: Union[str, unicode, None]
-    cookie_policy="ACCEPT_ORIGINAL_SERVER",  # type: Union[str, unicode]
-    redirect_policy="NORMAL",  # type: Union[str, unicode]
-    version="HTTP_2",  # type: Union[str, unicode]
-    customizer=None,  # type: Optional[Callable[..., Any]]
-):
-    # type: (...) -> JythonHttpClient
-    """Provides a general use object that can be used to send and
-    receive HTTP requests.
-
-    The object created by this function is a wrapper around Java's
-    HttpClient class. Usage requires creating a JythonHttpClient object
-    with a call to system.net.httpClient, then calling a method (such as
-    get(), post()) on the JythonHttpClient to actually issue a request.
-
-    Args:
-        timeout: A value, in milliseconds, to set the client's connect
-            timeout setting to. Defaults to 60000. Optional.
-        bypass_cert_validation: A boolean indicating whether the client
-            should attempt to validate the certificates of remote
-            servers, if connecting via HTTPS/SSL. Defaults to False.
-            Optional.
-        username: A string indicating the username to use for
-            authentication if the remote server requests authentication;
-            specifically, by responding with a WWW-Authenticate or
-            Proxy-Authenticate header. Only supports Basic
-            authentication. If username is specified but not password,
-            an empty string will be used for the password in the Basic
-            Authentication response. Defaults to None. Optional.
-        password: A string indicating the password to use for
-            authentication. Defaults to None. Optional.
-        proxy: The address of a proxy server, which will be used for
-            HTTP and HTTPS traffic. If a port is not specified as part
-            of that address, it will be assumed from the protocol in the
-            URL, i.e. 80/443. Defaults to None. Optional.
-        cookie_policy: A string representing this client's cookie
-            policy. Accepts values "ACCEPT_ALL", "ACCEPT_NONE", and
-            "ACCEPT_ORIGINAL_SERVER". Defaults to
-            "ACCEPT_ORIGINAL_SERVER". Optional.
-        redirect_policy: A string representing this client's redirect
-            policy. Acceptable values are listed below. Defaults to
-            "Normal". Optional.
-        version: A string specifying either HTTP_2 or HTTP_1_1 for the
-            HTTP protocol. When omitted, the previous default of HTTP_2
-            is implied. Optional.
-        customizer: A reference to a function. This function will be
-            called with one argument (an instance of
-            HttpClient.Builder). The function should operate on that
-            builder instance, which allows for customization of the
-            created HTTP client. Defaults to None. Optional.
-
-    Returns:
-        An object wrapped around an instance of Java's HttpClient class.
-        The httpClient object has methods that can be called to execute
-        HTTP requests against a server.
-    """
-    print(
-        timeout,
-        bypass_cert_validation,
-        username,
-        password,
-        proxy,
-        cookie_policy,
-        redirect_policy,
-        version,
-        customizer,
-    )
-    return JythonHttpClient()
 
 
 def _sendEmail(
