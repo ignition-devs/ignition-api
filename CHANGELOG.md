@@ -1,3 +1,9 @@
+## 8.3.10.post1 (2026-10-19)
+
+### Fix
+
+- **system**: make httpClient a callable instance (#97)
+
 ## 8.3.10 (2026-10-08)
 
 ### Refactor
