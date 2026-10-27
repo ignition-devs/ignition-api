@@ -9,9 +9,8 @@ from com.inductiveautomation.ignition.common.opc import BrowseElementType
 from com.inductiveautomation.ignition.common.script.abc import AbstractJythonSequence
 from com.inductiveautomation.ignition.common.script.message import Request
 from java.io import OutputStream, Writer
-from java.lang import Class
+from java.lang import Class, Object
 from java.lang import Exception as JavaException
-from java.lang import Object
 from java.util import Locale
 from org.json import JSONObject
 from org.python.core import PyFunction, PyList, PyObject, PySequence

@@ -7,12 +7,12 @@ on:
 
 jobs:
   tox-package:
-    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@92e51b14907b5aac1a8af1fcd9c2a1a5369dc47a # v7.0.32
+    uses: coatl-dev/workflows/.github/workflows/tox-docker.yml@d7cf5f9059f9a5fa365b8c9e06ff63f5d968ddb0 # v7.1.0
     with:
       checkout-ref: ${{ inputs.checkout-ref }}
 
   tox-stubs:
-    uses: coatl-dev/workflows/.github/workflows/tox.yml@92e51b14907b5aac1a8af1fcd9c2a1a5369dc47a # v7.0.32
+    uses: coatl-dev/workflows/.github/workflows/tox.yml@d7cf5f9059f9a5fa365b8c9e06ff63f5d968ddb0 # v7.1.0
     with:
       python-versions: |
         3.9
