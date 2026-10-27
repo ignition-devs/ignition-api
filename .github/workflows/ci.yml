@@ -10,13 +10,13 @@ on:
 
 jobs:
   pre-commit:
-    uses: coatl-dev/workflows/.github/workflows/pre-commit.yml@92e51b14907b5aac1a8af1fcd9c2a1a5369dc47a # v7.0.32
+    uses: coatl-dev/workflows/.github/workflows/pre-commit.yml@d7cf5f9059f9a5fa365b8c9e06ff63f5d968ddb0 # v7.1.0
     with:
       checkout-ref: ${{ github.ref }}
       skip-hooks: 'pylint'
 
   pylint:
-    uses: coatl-dev/workflows/.github/workflows/pylint.yml@92e51b14907b5aac1a8af1fcd9c2a1a5369dc47a # v7.0.32
+    uses: coatl-dev/workflows/.github/workflows/pylint.yml@d7cf5f9059f9a5fa365b8c9e06ff63f5d968ddb0 # v7.1.0
     with:
       path: src
       checkout-ref: ${{ github.ref }}

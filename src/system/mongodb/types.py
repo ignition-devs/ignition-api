@@ -2,9 +2,6 @@
 
 from org.bson.types import (
     Binary,
-)
-from org.bson.types import BSONTimestamp as Timestamp
-from org.bson.types import (
     Code,
     CodeWithScope,
     CodeWScope,
@@ -14,6 +11,7 @@ from org.bson.types import (
     ObjectId,
     Symbol,
 )
+from org.bson.types import BSONTimestamp as Timestamp
 
 __all__ = [
     "Binary",

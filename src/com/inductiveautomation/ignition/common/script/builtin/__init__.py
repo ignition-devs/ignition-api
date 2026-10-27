@@ -5,9 +5,14 @@ __all__ = ["AbstractOPCUtilities", "DatasetUtilities", "SProcCall", "SystemUtili
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 from java.io import OutputStream, Writer
-from java.lang import ArrayIndexOutOfBoundsException, Class
+from java.lang import (
+    ArrayIndexOutOfBoundsException,
+    Class,
+    IllegalArgumentException,
+    Object,
+    UnsupportedOperationException,
+)
 from java.lang import Exception as JavaException
-from java.lang import IllegalArgumentException, Object, UnsupportedOperationException
 from java.util import Locale
 
 from com.inductiveautomation.ignition.common import BasicDataset, Dataset
