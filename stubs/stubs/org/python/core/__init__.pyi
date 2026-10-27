@@ -4,9 +4,8 @@ from typing import Any, Iterable, Iterator, List, Mapping, Optional, Tuple, Unio
 from enum import Enum
 from java.io import PrintWriter
 from java.lang import Class, Object, RuntimeException, StringBuilder
-from java.util import Collection
+from java.util import Collection, ListIterator, Properties
 from java.util import Iterator as JIterator
-from java.util import ListIterator, Properties
 from org.python.expose import TypeBuilder
 
 class PyObject(Object):
