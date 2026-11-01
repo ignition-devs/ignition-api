@@ -21,7 +21,7 @@ repos:
         language_version: python3.12
         files: ^src/
   - repo: https://github.com/PyCQA/isort
-    rev: 10.0.0b1
+    rev: 10.0.0b2
     hooks:
       - id: isort
         name: isort-package
@@ -47,7 +47,7 @@ repos:
         files: ^src/
         additional_dependencies: [pydoclint]
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.4.1
+    rev: 7.5.0
     hooks:
       - id: flake8
         name: flake8-stubs
