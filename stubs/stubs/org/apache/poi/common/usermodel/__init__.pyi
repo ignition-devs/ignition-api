@@ -1,0 +1,19 @@
+from typing import List, Union
+
+from java.lang import Enum
+
+class Hyperlink:
+    def getAddress(self) -> Union[str, unicode]: ...
+    def getLabel(self) -> Union[str, unicode]: ...
+    def getType(self) -> HyperlinkType: ...
+    def setAddress(self, address: Union[str, unicode]) -> None: ...
+    def setLabel(self, label: Union[str, unicode]) -> None: ...
+
+class HyperlinkType(Enum):
+    DOCUMENT: int
+    EMAIL: int
+    FILE: int
+    NONE: int
+    URL: int
+    @staticmethod
+    def values() -> List[HyperlinkType]: ...

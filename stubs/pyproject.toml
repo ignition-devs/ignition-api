@@ -1,0 +1,50 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=61.2",
+]
+
+[project]
+name = "ignition-api-stubs"
+version = "2027.2.0b1"
+description = "Ignition Scripting API"
+readme = "README.md"
+keywords = [
+  "hmi",
+  "ignition",
+  "inductive automation",
+  "scada",
+]
+license = "MIT"
+authors = [ { name = "César Román", email = "cesar@coatl.dev" } ]
+requires-python = ">=3.9,<3.13"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: Manufacturing",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Typing :: Stubs Only",
+  "Typing :: Typed",
+]
+dependencies = [
+  "java-api-stubs>25",
+  "types-enum34",
+]
+urls.Documentation = "https://docs.inductiveautomation.com/docs/2027/appendix/scripting-functions"
+urls.Funding = "https://github.com/sponsors/cesarcoatl"
+urls.Source = "https://github.com/ignition-devs/ignition-api/tree/2027"
+urls.Tracker = "https://github.com/ignition-devs/ignition-api/issues"
+
+[tool.setuptools]
+package-dir = { "" = "stubs" }
+include-package-data = true
+package-data."*" = [ "*.pyi", "py.typed" ]

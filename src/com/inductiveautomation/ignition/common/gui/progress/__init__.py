@@ -1,0 +1,110 @@
+from __future__ import print_function
+
+__all__ = ["ProgressListener", "TaskProgressListener", "TaskProgressState"]
+
+from typing import Any, Union
+
+from java.lang import Object
+
+
+class ProgressListener(object):
+    def setIndeterminate(self, arg):
+        # type: (bool) -> None
+        raise NotImplementedError
+
+    def setNote(self, note):
+        # type: (Union[str, unicode]) -> None
+        raise NotImplementedError
+
+    def setProgress(self, val):
+        # type: (int) -> None
+        raise NotImplementedError
+
+    def setProgressMax(self, max_):
+        # type: (int) -> None
+        raise NotImplementedError
+
+
+class TaskProgressListener(ProgressListener):
+    def isCanceled(self):
+        # type: () -> bool
+        raise NotImplementedError
+
+    def setIndeterminate(self, arg):
+        # type: (bool) -> None
+        raise NotImplementedError
+
+    def setNote(self, note):
+        # type: (Union[str, unicode]) -> None
+        raise NotImplementedError
+
+    def setProgress(self, val):
+        # type: (int) -> None
+        raise NotImplementedError
+
+    def setProgressMax(self, max_):
+        # type: (int) -> None
+        raise NotImplementedError
+
+
+class TaskProgressState(Object, ProgressListener):
+    def __init__(self, *args):
+        # type: (*Any) -> None
+        super(TaskProgressState, self).__init__()
+        print(args)
+
+    def applyTo(self, listener):
+        # type: (ProgressListener) -> None
+        pass
+
+    def getNote(self):
+        # type: () -> Union[str, unicode]
+        pass
+
+    def getProgress(self):
+        # type: () -> int
+        pass
+
+    def getProgressMax(self):
+        # type: () -> int
+        pass
+
+    def getResult(self):
+        # type: () -> Object
+        pass
+
+    def getTaskUID(self):
+        # type: () -> Union[str, unicode]
+        pass
+
+    def isFinished(self):
+        # type: () -> bool
+        return True
+
+    def isIndeterminant(self):
+        # type: () -> bool
+        return True
+
+    def setFinished(self, finished):
+        # type: (bool) -> None
+        pass
+
+    def setIndeterminate(self, arg):
+        # type: (bool) -> None
+        pass
+
+    def setNote(self, note):
+        # type: (Union[str, unicode]) -> None
+        pass
+
+    def setProgress(self, val):
+        # type: (int) -> None
+        pass
+
+    def setProgressMax(self, max_):
+        # type: (int) -> None
+        pass
+
+    def setResult(self, result):
+        # type: (Object) -> None
+        pass

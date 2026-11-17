@@ -1,0 +1,27 @@
+{
+  "name": "ignition-api@2027",
+  "image": "quay.io/ignition-devs/devcontainer-base:python",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
+  "workspaceFolder": "/workspaces/ignition-api",
+  "mounts": [
+    "source=pre-commit-cache,target=/root/.cache/pre-commit,type=volume",
+    "source=ignition-api-2027-tox,target=${containerWorkspaceFolder}/.tox,type=volume",
+    "source=ignition-api-2027-tox-stubs,target=${containerWorkspaceFolder}/stubs/.tox,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.vscode-github-actions",
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/python/2.7/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": {
+    "pre-commit": "pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push",
+    "dev-requirements": "python2 -m pip install --requirement requirements.txt"
+  }
+}

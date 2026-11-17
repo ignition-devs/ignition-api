@@ -1,0 +1,32 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  tox:
+    uses: $/.github/workflows/tox.yml
+    with:
+      checkout-ref: ${{ github.event.release.tag_name }}
+
+  pypi-upload:
+    needs: tox
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Upload package to PyPI
+        uses: coatl-dev/actions/pypi-upload@c339f0299e21b3b28b42414e3ea474d33468713c # v7.1.5
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_PKG }}
+
+      - name: Upload stubs to PyPI
+        uses: coatl-dev/actions/pypi-upload@c339f0299e21b3b28b42414e3ea474d33468713c # v7.1.5
+        with:
+          python-version: '3.12'
+          password: ${{ secrets.PYPI_API_TOKEN_IGNITION_API_STUBS }}
+          working-directory: stubs
