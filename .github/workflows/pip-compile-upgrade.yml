@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: ['8.1', '8.3']
+        branch: ['8.1', '8.3', '2027']
       fail-fast: false
     steps:
       - name: Checkout repo

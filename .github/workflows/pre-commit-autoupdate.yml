@@ -9,7 +9,7 @@ jobs:
   pre-commit-autoupdate:
     strategy:
       matrix:
-        branch: ['8.1', '8.3']
+        branch: ['8.1', '8.3', '2027']
       fail-fast: false
     uses: coatl-dev/workflows/.github/workflows/pre-commit-autoupdate.yml@65d1a1eda04de5bb54bd5057b3ebe4b7c8fa4b45 # v7.1.6
     with:
