@@ -36,7 +36,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "java-api-stubs>17,<21",
+  "java-api-stubs>=17.26.5,<21",
   "types-enum34",
 ]
 urls.Documentation = "https://docs.inductiveautomation.com/docs/8.3/appendix/scripting-functions"
